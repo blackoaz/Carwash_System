@@ -33,13 +33,15 @@ ALLOWED_HOSTS = []
 
 SHARED_APPS = (
     'django_tenants',  # mandatory
-    'cwwwms.main', # you must list the app where your tenant model resides in
+    'cwwms.main', # you must list the app where your tenant model resides in
+)
 
+TENANT_APPS = (
     'django.contrib.contenttypes',
-
     # everything below here is optional
     'django.contrib.admin',
     'django.contrib.auth',
+    
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -48,11 +50,10 @@ SHARED_APPS = (
     'phonenumber_field',
     'rest_framework',
     'rest_framework_simplejwt',
-)
-
-TENANT_APPS = (
+    
     # your tenant-specific apps
     'cwwms.carwash',
+    'cwwms.users',
 )
 
 INSTALLED_APPS = list(SHARED_APPS) + [app for app in TENANT_APPS if app not in SHARED_APPS]
@@ -128,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'main.CustomUser'
+AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
 
