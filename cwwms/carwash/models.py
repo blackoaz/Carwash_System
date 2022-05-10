@@ -17,7 +17,7 @@ BODY_CHOICES = (
 
 class Vehicle(models.Model):
     unique_id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    registration = models.CharField(max_length=10)
+    registration = models.CharField(max_length=10, unique=True)
     body_type = models.CharField(max_length=30, choices=BODY_CHOICES, default='Saloon')
     created_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
