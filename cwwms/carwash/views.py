@@ -3,30 +3,42 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
 # Create your views here.
-from .serializer import SaleSerializer, SaleItemSerializer, ServiceSerializer, VehicleSerializer
-from .models import Sale, SaleItem, Service, Vehicle
+from .serializer import CategorySerializer, SaleSerializer, SaleItemSerializer, ServiceSerializer, VehicleSerializer
+from .models import Category, Sale, SaleItem, Service, Vehicle
 
+#CreateView, UpdateView, DeleteView, ListView, DetailView
 
-@api_view(['POST'])
-def create_vehicle(request):
-    vehicle = VehicleSerializer(data=request.data)
+class CategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
     
-    if Vehicle.objects.filter(**request.data).exists():
-        raise serializers.ValidationError('This vehicle already exists')
-    
-    if vehicle.is_valid():
-        vehicle.save()
-        return Response(vehicle.data)
-    else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
     
 class VehicleList(generics.ListCreateAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
-
+    
+class VehicleDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = VehicleSerializer
+    
 class ServiceList(generics.ListCreateAPIView):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer
-     
+
+class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer
+    
+class SaleList(generics.ListCreateAPIView):
+    queryset = Sale.objects.all()
+    serializer_class = SaleSerializer
+
+class SaleDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Sale.objects.all()
+    serializer_class = SaleSerializer
+
         
         
