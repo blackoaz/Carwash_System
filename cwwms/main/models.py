@@ -3,8 +3,15 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from django_tenants.models import TenantMixin, DomainMixin
-  
+ 
+class Common(models.Model):
+    uid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        abstract = True
+
 class Client(TenantMixin):
     tenant_name = models.CharField(max_length=100, unique=True, null=False, blank=False)
     tenant_uuid = models.UUIDField(default=uuid.uuid4, null=False, blank=False)

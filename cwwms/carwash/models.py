@@ -4,74 +4,79 @@ from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
 
+from cwwms.main.models import Common
+
 # Create your models here.
 
+class Category(Common):
+    name = models.CharField(max_length=100, unique=True)
+    
+    class Meta:
+        ordering = ('-name',)
+        verbose_name_plural = 'categories'
+    
+    def __str__(self) -> str:
+        return self.name
 
-
-class Vehicle(models.Model):
-    class VehicleType(models.TextChoices):
-        SUV = 'SUV',
-        Saloon = 'Saloon', 
-        Lorry = 'Lorry',
-        Bus = 'Bus',
-        Motorcycle = 'Motorcyle',
-        Tuktuk = 'Tuktuk',
-        Tipper = 'Tipper', 
-        Van = 'Van',
-        Parts = 'Parts'
-        
-    uid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
+class Vehicle(Common):
+    category = models.ForeignKey(Category, related_name='vehicles', on_delete=models.PROTECT) 
     registration = models.CharField(max_length=10, unique=True, validators=[
             RegexValidator(
                 regex='^[A-Z]{2,4}[0-9]{3,4}[A-Z]{1}$',
                 message='Vehicle Registration doesn\'t comply',
             ),
         ])
-    vehicle_type = models.CharField(max_length=30, choices=VehicleType.choices, default='Saloon')
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ('-registration',)
     
     def __str__(self) -> str:
         return self.registration
 
-
-class Sale(models.Model):
+class Service(Common):        
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    category = models.ForeignKey(Category, related_name='services', on_delete=models.PROTECT) 
+    price = models.DecimalField(max_digits=10, decimal_places=2)
+    available = models.BooleanField(default=True)
+    
+    class Meta:
+        ordering = ('-name',)
+        
+    def __str__(self) -> str:
+        return f'Created service {self.name} for category {self.category}'
+    
+class Sale(Common):
     class State(models.TextChoices):
         PAID = "PAID"
         UNPAID = "UNPAID"
         CANCELLED = "CANCELLED"
 
-    uid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
     vehicle = models.ForeignKey(to=Vehicle, on_delete=models.PROTECT)
-    created_at = models.DateTimeField(auto_now_add=True)
     attendant = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
-    state = models.CharField(max_length=15, choices=State.choices)
-    updated_at = models.DateTimeField(auto_now=True)
+    state = models.CharField(max_length=15, choices=State.choices, default=State.PAID)
     
-class Service(models.Model):
-    class VehicleType(models.TextChoices):
-        SUV = 'SUV',
-        Saloon = 'Saloon', 
-        Lorry = 'Lorry',
-        Bus = 'Bus',
-        Motorcycle = 'Motorcyle',
-        Tuktuk = 'Tuktuk',
-        Tipper = 'Tipper', 
-        Van = 'Van',
-        Parts = 'Parts'
+    class Meta:
+        ordering = ('-created',)
         
-    uid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    vehicle_type = models.CharField(max_length=100, choices=VehicleType.choices)
-    price = models.FloatField()
+    def __str__(self):
+        return f'Sale #{self.id}'
+ 
+    def get_total_cost(self):
+        total_cost = sum(item.get_cost() for item in self.items.all())
+        return total_cost
 
-class SaleItem(models.Model):
-    uid = models.UUIDField(default=uuid.uuid4, editable=False, unique=True)
-    sale_id = models.ForeignKey(Sale,on_delete=models.CASCADE)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
+
+class SaleItem(Common):
+    sale = models.ForeignKey(Sale,on_delete=models.CASCADE, related_name="items")
+    service = models.ForeignKey(Service, related_name='sale_items', on_delete=models.CASCADE)
+    quantity = models.PositiveIntegerField(default=1)
     
+    def __str__(self) -> str:
+        return self.uid
+    
+    def get_cost(self):
+        return self.service.price * self.quantity
 
 
     
