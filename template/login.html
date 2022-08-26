@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'assets/CSS/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/CSS/login.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carwash Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="container">
+    <section class="header">
+        <nav>
+            <a href="#"Class="logo"><b>LOGO</b></a>       
+        </nav>
+    </section>
+    <section class="form">
+        <div class="parent">
+            <div class="child">
+                <form action="" method="POST">
+                    <h1>LOGIN</h1><br>
+                    {% csrf_token %}
+                    <div class="user">
+                        <label for="Username">USERNAME:</label>
+                        <input type="text">
+                    </div>
+                    <div class="password">
+                        <label for="password">PASSWORD:</label>
+                        <input type="password">
+                    </div>
+                    <div class="btn-text-center">
+                        <input type="submit" type="button" class="btn btn-primary" value="Sign in">
+                  </div>
+                  <div>
+                    <style>
+                        h5{
+                            color: rgb(0, 238, 255);
+                        }
+                    </style>
+                    {% for message in messages %}
+                        <h5>{{ message }}</h5>
+                    {% endfor %}
+                </div>
+                  <p>if you dont have an account <a href="{% url 'registerUser' %}">Register here</a></p>
+                 
+                </form>
+            </div> 
+        </div>
+    </section> 
+    <script>
+        var navLinks =document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px"
+        } 
+      </script>
+</body>
+</html>

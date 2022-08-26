@@ -1,0 +1,701 @@
+/*
+@media(max-width: 480px){
+    .payment{
+        display: flex;
+    grid-template-columns: 2fr auto;
+    flex-direction: row;
+    margin-top: 80px;
+    height: 100vh;
+    grid-gap: 4px;
+    background-color: rgb(247, 242, 242); 
+    position: fixed;  
+    }
+    .carwash-services{
+        display: grid;
+        width: 250px;
+        grid-gap: 1px;
+        margin-top: 1px;
+        margin-left: 1px;
+        grid-template-rows: 8% 2% 5% 2% 10%  2% 5% 2% auto;   
+    }
+    
+    .services-payment{
+        width: 204px;
+        margin-top: 0px;
+        margin-left: 20px;
+        overflow: hidden;
+        overflow-wrap: normal;
+    }
+    h4{
+        font-size: 10px;
+    }
+    .reg .btn-register{
+        width: 30px;
+        height: 15px;
+        margin-top: 10px;
+        padding: 0px 2px;
+        font-size: 8px;
+        display: inline-block;
+        border-radius: 8px;
+    }
+    .reg input {
+        width: 150px;
+        height: 20px;
+        border-radius: 10px;
+        font-weight: bold;
+        background-color:rgb(185, 188, 189);
+        border: 1px solid blanchedalmond;
+        font-size: 10px;
+        margin-top: 15px;
+        margin-left: 2px;
+        display: inline-block; 
+    }
+    .carwash-services .scroll-btn{
+        display: grid;
+        gap: var(--size-3);
+        grid-auto-flow: column;
+        grid-auto-columns: 23%;
+        overflow-x: auto;
+        overscroll-behavior-inline:contain;
+        grid-gap: 2px;
+    }
+    .scroll-btn{
+        width: 100%;
+    }
+    .reg label{
+        font-size: 10px;
+    }
+    .carwash-services .row1{
+        display: grid;
+        gap: var(--size-3);
+        grid-auto-flow: column;
+        grid-auto-columns: 23%;
+        overflow-x: auto;
+        overscroll-behavior-inline:contain;
+        grid-gap: 2px;
+    }
+    .row1{
+        width: 100%;
+    }
+    
+    .carwash-services button{
+        height: 40px;
+        width: 50px;
+        border-radius: 4px;
+        font-size: 8px;
+    }
+    .carwash-services button:hover{
+        background-color: #2a2d35;
+    }
+    .row5 .pay-vehicle-table{
+        width: 250px;
+        font-size: 8px;
+        border: 1px solid;
+        text-align: center;
+    }
+    .pay-vehicle-table thead{
+        align-items: center;
+        font-size: 10px;
+        border: 1px solid;
+    }
+    .pay-vehicle-table tr{
+        color: black;
+        text-align: left;
+        font-weight: bold;
+        align-content: center;
+        font-weight: 200;
+        font-size: 8px;
+        border: 1px solid;
+    }
+    .row5 .pay-vehicle-table .pay-btn{
+        width: 30px;
+        height: 20px;
+        background-color: rgb(244, 158, 247);
+        text-decoration: none;
+        color: #fff;
+        margin-left: 20px;
+    }
+    .row5 .pay-vehicle-table .pay-btn:hover{
+        background-color: #064115;
+    }
+    .row5 .pay-vehicle-table .pay-btn a{
+        text-decoration: none;
+    }
+    .row1 button{
+        height: 20px;
+        width: 50px;
+        background-color: #3d2341;
+        box-sizing: border-box;
+        overflow-wrap: normal;
+    }
+    .row1 button:hover{
+        background-color: #064115;
+    }
+    .services-payment .vehicle-details{
+        background-color: rgba(30, 47, 204, 0.281);
+        border: 1px solid;
+        padding: 0 20px;
+        height: auto;
+    }
+    .vehicle-details .vhcl{
+        display: flex;
+       justify-content: space-between;
+       font-size: 10px;
+    }
+    .vehicle-details .srvc{
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+    }
+    .vehicle-details .prc{
+        display: flex;
+        justify-content: space-between;
+        font-size: 10px;
+    }
+    .vehicle-details .tcost{
+        display: flex;
+        justify-content: space-between;
+        font-size: 8px;
+    }
+    .vehicle-details .attendendt{
+        display: flex;
+        justify-content: space-between;
+        font-size: 8px;
+    }
+    .vehicle-details .attend{
+        min-width: 15em;
+        position: relative;
+        margin: 2em;
+        font-size: 10px;
+    }
+    .attend{
+        box-sizing: border-box;
+        display: flex;
+        font-size: 8px;
+    }
+    .attend button{
+        height: 25px;
+        width: 40px;
+        background-color: rgb(42, 70, 83);
+    }
+    .attend button:hover{
+        background-color: #064115;
+    }
+
+    .pay-mode{
+        margin-top: 4px;
+        text-align: center;
+        color: #080808;
+    }
+    .btn button{
+        display: flex;
+       justify-content: space-between;
+        background-color: #064115;
+        margin:  5px 15px;
+        border: solid black;
+        height: 25px;
+        width: 100px;
+        text-align: center;
+        color: #fff;
+        padding: 2px 30px;
+        border-radius: 8px;
+        font-size: 10px;
+    }
+    .btn button:hover{
+        cursor: pointer;
+        background-color: #009879;
+        box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2);
+    }
+    .vehicle-details .status{
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn-pay{
+        background-color: #bad837;
+        height: 25px;
+        width: 50px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 8px;
+        margin-left: -12px;
+        display: inline-block;
+    }
+    .btn-pay:hover{
+        cursor: pointer;
+        background-color: #064115;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .btn-clear{
+        background-color: #b42222;
+        height: 25px;
+        width: 50px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 8px;
+        display: inline-block;
+    }
+    .btn-clear:hover{
+        cursor: pointer;
+        background-color: #3f2018;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .row5 .btn-more{
+        position: absolute;
+        height: 20px;
+        width: 30px;
+        background-color: rgba(243, 132, 92, 0.568);
+        top: 420px;
+        right: 220px;
+        font-size: 8px;
+    }
+    .btn-more a{
+        text-decoration: none;
+    }
+
+}
+
+/*media query for 768 pixels*/
+@media(max-width: 768px){
+    .payment{
+        margin-top: 75px;
+    }
+    .carwash-services{
+        display: grid;
+        width: 500px;
+        grid-gap: 1px;
+        margin-top: 1px;
+        margin-left: 1px;
+        grid-template-rows: 10% 4% 10% 2% 20%  5% 10% 5% auto;   
+    }
+    
+    .services-payment{
+        width: 260px;
+        margin-top: 1px;
+        margin-left: 20px;
+        overflow: hidden;
+        overflow-wrap: normal;
+    }
+    h4{
+        font-size: 12px;
+    }
+    .reg .btn-register{
+        width: 80px;
+        height: 30px;
+        margin-top: 10px;
+        padding: 0px 2px;
+        font-size: 12px;
+        display: inline-block;
+        border-radius: 10px;
+    }
+    .reg input {
+        width: 250px;
+        height: 30px;
+        border-radius: 10px;
+        font-weight: bold;
+        background-color:rgb(185, 188, 189);
+        border: 1px solid blanchedalmond;
+        font-size: 12px;
+        margin-top: 15px;
+        margin-left: 2px;
+        display: inline-block; 
+    }
+    .reg label{
+        font-size: 10px;
+    }
+    .carwash-services button{
+        height: 40px;
+        width: 80px;
+        border-radius: 4px;
+        font-size: 8px;
+    }
+    .carwash-services button:hover{
+        background-color: #064115;
+    }
+    .row5 .pay-vehicle-table{
+        width: 520px;
+        font-size: 8px;
+        text-align: center;
+    }
+    .pay-vehicle-table thead{
+        align-items: center;
+        font-size: 16px;
+    }
+    .pay-vehicle-table tr{
+        color: black;
+        text-align: left;
+        font-weight: bold;
+        align-content: center;
+        font-weight: 200;
+        font-size: 10px;
+    }
+    .row5 .pay-vehicle-table .pay-btn{
+        width: 40px;
+        height: 20px;
+        background-color: rgb(244, 158, 247);
+        text-decoration: none;
+        color: #fff;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+    .row5 .pay-vehicle-table .pay-btn:hover{
+        background-color: #064115;
+    }
+    .row5 .pay-vehicle-table .pay-btn a{
+        text-decoration: none;
+    }
+    .row1 button{
+        height: 30px;
+        width: 60px;
+        background-color: #3d2341;
+        box-sizing: border-box;
+        overflow-wrap: normal;
+    }
+    .row1 button:hover{
+        background-color: #064115;
+    }
+    .services-payment .vehicle-details{
+        background-color: rgba(30, 47, 204, 0.281);
+        border: 1px solid;
+        padding: 0 20px;
+        height: auto;
+    }
+    .vehicle-details .vhcl{
+        display: flex;
+       justify-content: space-between;
+       font-size: 12px;
+    }
+    .vehicle-details .srvc{
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+    .vehicle-details .prc{
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+    .vehicle-details .tcost{
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+    .vehicle-details .attendendt{
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+    }
+    .vehicle-details .attend{
+        min-width: 15em;
+        position: relative;
+        margin: 2em;
+        font-size: 12px;
+    }
+    .attend{
+        box-sizing: border-box;
+        display: flex;
+        font-size: 12px;
+    }
+    .attend button{
+        height: 30px;
+        width: 60px;
+        background-color: rgb(42, 70, 83);
+    }
+    .attend button:hover{
+        background-color: #064115;
+    }
+
+    .pay-mode{
+        margin-top: 8px;
+        text-align: center;
+        color: #080808;
+    }
+    .btn button{
+        display: flex;
+        justify-content: space-between;
+        background-color: #009879;
+        margin:  5px 30px;
+        border: solid black;
+        height: 30px;
+        width: 150px;
+        text-align: center;
+        color: #fff;
+        padding: 4px 60px;
+        border-radius: 8px;
+        font-size: 10px;
+        margin-bottom: 10px;
+    }
+    .btn button:hover{
+        cursor: pointer;
+        background-color: #064115;
+        box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2);
+    }
+    .vehicle-details .status{
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn-pay{
+        background-color: #bad837;
+        height: 30px;
+        width: 70px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 12px;
+        margin-top: 20px;
+        display: inline-block;
+    }
+    .btn-pay:hover{
+        cursor: pointer;
+        background-color: #064115;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .btn-clear{
+        background-color: #b42222;
+        height: 30px;
+        width: 70px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 12px;
+        display: inline-block;
+    }
+    .btn-clear:hover{
+        cursor: pointer;
+        background-color: #3f2018;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .row5 .btn-more{
+        position: absolute;
+        height: 22px;
+        width: 40px;
+        background-color: #dcf35c91;
+        top: 740px;
+        right: 310px;
+        font-size: 12px;
+    }
+    .btn-more a{
+        text-decoration: none;
+    }
+
+}*/
+/*
+@media(max-width: 1000px){
+    .payment{
+        margin-top: 75px;
+    }
+    .carwash-services{
+        display: grid;
+        width: 740px;
+        grid-gap: 1px;
+        margin-top: 1px;
+        margin-left: 1px;
+        grid-template-rows: 8% 4% 8% 4% 22%  5% 8% 4% auto;   
+    }
+    
+    .services-payment{
+        width: auto;
+        margin-top: 1px;
+        margin-left: -30px;
+        overflow: hidden;
+        overflow-wrap: normal;
+    }
+    h4{
+        font-size: 16px;
+    }
+    .reg .btn-register{
+        width: 120px;
+        height: 40px;
+        margin-top: 10px;
+        padding: 0px 2px;
+        font-size: 16px;
+        display: inline-block;
+        border-radius: 10px;
+    }
+    .reg input {
+        width: 400px;
+        height: 40px;
+        border-radius: 10px;
+        font-weight: bold;
+        background-color:rgb(185, 188, 189);
+        border: 1px solid blanchedalmond;
+        font-size: 16px;
+        margin-top: 15px;
+        margin-left: 2px;
+        display: inline-block; 
+    }
+    .reg label{
+        font-size: 16px;
+    }
+    .carwash-services button{
+        height: 60px;
+        width: 110px;
+        border-radius: 4px;
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    .carwash-services button:hover{
+        background-color: #064115;
+    }
+    .row5 .pay-vehicle-table{
+        width: 750px;
+        font-size: 16px;
+        text-align: center;
+    }
+    .pay-vehicle-table thead{
+        align-items: center;
+        font-size: 16px;
+    }
+    .pay-vehicle-table tr{
+        color: black;
+        text-align: left;
+        font-weight: bold;
+        align-content: center;
+        font-weight: 200;
+        font-size: 16px;
+    }
+    .row5 .pay-vehicle-table .pay-btn{
+        width: 80px;
+        height: 35px;
+        background-color: rgb(244, 158, 247);
+        text-decoration: none;
+        color: #fff;
+        margin-left: 20px;
+        margin-bottom: 10px;
+    }
+    .row5 .pay-vehicle-table .pay-btn:hover{
+        background-color: #064115;
+    }
+    .row5 .pay-vehicle-table .pay-btn a{
+        text-decoration: none;
+    }
+    .row1 button{
+        height: 42px;
+        width: 90px;
+        background-color: #3d2341;
+        box-sizing: border-box;
+        overflow-wrap: normal;
+    }
+    .row1 button:hover{
+        background-color: #064115;
+    }
+    .services-payment .vehicle-details{
+        background-color: rgba(30, 47, 204, 0.281);
+        border: 1px solid;
+        padding: 0 20px;
+        height: auto;
+    }
+    .vehicle-details .vhcl{
+        display: flex;
+       justify-content: space-between;
+       font-size: 16px;
+    }
+    .vehicle-details .srvc{
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+    }
+    .vehicle-details .prc{
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+    }
+    .vehicle-details .tcost{
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+    }
+    .vehicle-details .attendendt{
+        display: flex;
+        justify-content: space-between;
+        font-size: 16px;
+    }
+    .vehicle-details .attend{
+        min-width: 15em;
+        position: relative;
+        margin: 2em;
+        font-size: 16px;
+    }
+    .attend{
+        box-sizing: border-box;
+        display: flex;
+        font-size: 16px;
+    }
+    .attend button{
+        height: 40px;
+        width: 100px;
+        background-color: rgb(42, 70, 83);
+    }
+    .attend button:hover{
+        background-color: #064115;
+    }
+
+    .pay-mode{
+        margin-top: 8px;
+        text-align: center;
+        color: #080808;
+    }
+    .btn button{
+        display: flex;
+        justify-content: space-between;
+        background-color: #009879;
+        margin:  5px 30px;
+        border: solid black;
+        height: 50px;
+        width: 200px;
+        text-align: center;
+        color: #fff;
+        padding: 4px 75px;
+        border-radius: 8px;
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .btn button:hover{
+        cursor: pointer;
+        background-color: #064115;
+        box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2);
+    }
+    .vehicle-details .status{
+        display: flex;
+        justify-content: space-between;
+    }
+    .btn-pay{
+        background-color: #bad837;
+        height: 45px;
+        width: 95px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 16px;
+        margin-top: 20px;
+        display: inline-block;
+    }
+    .btn-pay:hover{
+        cursor: pointer;
+        background-color: #064115;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .btn-clear{
+        background-color: #b42222;
+        height: 45px;
+        width: 95px;
+        border-radius: 8px;
+        text-align: center;
+        font-size: 16px;
+        display: inline-block;
+    }
+    .btn-clear:hover{
+        cursor: pointer;
+        background-color: #3f2018;
+        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2);
+    }
+    .row5 .btn-more{
+        position: absolute;
+        height: 28px;
+        width: 50px;
+        background-color: #dcf35c91;
+        top: 525px;
+        right: 318px;
+        font-size: 16px;
+    }
+    .btn-more a{
+        text-decoration: none;
+    }
+
+}*/

@@ -1,0 +1,158 @@
+html,body{
+    overflow: hidden;
+}
+.Body-table{
+    max-width: 900px;
+    padding: 15px;
+    overflow: auto;
+    margin: auto;
+    border-radius: 10px;
+    
+    
+}
+table{
+    width: 100%;
+    font-size: 13px;
+    color: #444;
+    white-space: nowrap;
+    border-collapse: collapse;
+    text-align: left;
+}
+table thead th{
+    padding: 15px;
+    background-color: #26a69a;
+    margin: 4px;
+    text-align: center;
+    position: relative;
+}
+table th td{
+    border: 1px solid #000000;
+    
+}
+.action_btn{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 4px;
+    cursor: pointer;
+}
+.action_btn>a{
+    text-decoration: none;
+    color: #444;
+    background: #fff;
+    border: 1px solid;
+    display: inline-block;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+.action_btn>a:nth-child(1) {
+    border-color: #03641b;
+}
+.action_btn>a:nth-child(2) {
+    border-color: rgb(248, 8, 8);
+}
+.action_btn>a:hover {
+    box-shadow: 0 3px 8px #0003;
+}
+
+.btn-create{
+    border: 2px solid green;
+    width: 100px;
+    text-align: center;
+    padding: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+a{
+    text-decoration: none;
+}
+
+.update-body{
+    position: absolute;
+    top: 20%; left:  -200%  /*2rem*/;
+    width: 20rem;
+    height: 15rem;
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: .5rem;
+    border: 1px solid;
+    align-items: center;
+}
+.update-body.active{
+    left: 3rem;
+    transition: .4s linear;
+    z-index: 10;
+}
+.body_type_update h4{
+    font-weight: bold;
+}
+
+.vehicle-body label{
+    display: block;
+    font-weight: bold;
+}
+.vehicle-body input{
+    max-width: 300px;
+    border-radius: 12px;
+    border: 2pxsolid grey;
+    padding: 10px;
+}
+
+
+.create-body{
+    position: absolute;
+    top: 20%; left:  -200%  /*2rem*/;
+    width: 20rem;
+    height: 15rem;
+    background: #fff;
+    padding: 2rem 3rem;
+    border-radius: .5rem;
+    border: 1px solid;
+    align-items: center;
+}
+.create-body.active{
+    left: 3rem;
+    transition: .4s linear;
+    z-index: 10;
+}
+
+.save-btn button{
+    width: 100px;
+    border: 2px solid;
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: aqua;
+}
+
+.save-btn button:hover{
+    background-color: green;
+    color: #fff;
+}
+
+.body_type_create .create{
+    margin-left: 12px;
+}
+
+.body_type_create label{
+    display: block;
+    font-weight: bold; 
+}
+
+.body_type_create input{
+    min-width: 250px;
+    border-radius: 12px;
+    border: 2pxsolid grey;
+    padding: 10px;
+}
+
+@media(max-width: 700px){
+    .update-body{
+        width: 80%;
+    }
+
+    .create-body{
+        width: 80%;
+    }
+}

@@ -1,0 +1,396 @@
+html,body{
+    margin: 0;
+    padding: 0;
+    font-family: 'poppins', sans-serif;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    background-color: rgb(194, 191, 191);
+}
+h1{
+    font-size: 1rem;
+}
+ .page-wrapper{
+    /*max-width: 85em;1366px*/
+    display: flex;
+    /* margin-left: 15px;
+    margin-right: 15px; */
+    padding-top: 80px;
+    justify-content: left;
+    /* border: 2px solid grey; */
+    box-sizing: border-box;
+    width: 100%;
+   }
+
+   .carwash-sec{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid grey; */
+    gap: 4px;
+    padding-bottom: 40px;
+    width: 1200px;
+   }
+
+   .wrapper-search{
+    margin-left: 4px;
+   }
+
+   .search-enter{
+    background-color:rgb(250, 252, 253);
+    display: inline-block;
+    width: 200px;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: auto;
+    margin-top: 10px;
+    margin-left: 4px;
+    height: 25px;
+    border: 1px solid blanchedalmond;
+    padding: 0 8px;
+   }
+    input{
+    min-width: 90px;
+    min-height: 30px;
+    background-color: #fff;
+    display: inline-block;
+    border-radius: 6px;
+    text-align: center;
+    margin-left: 4px;
+    border: 1px solid #064115;
+    cursor: pointer;
+   }
+   .btn-enter:hover{
+    background-color: #064115;
+    color: #fff;
+}
+
+
+   .wrapper1{
+    display: grid;
+    grid-auto-columns: 17%;
+    gap:3;
+    overflow-x: auto;
+    grid-auto-flow: column;
+    overscroll-behavior-inline: contain;
+    padding-top: 20px;
+    padding-bottom: 20px;
+   }
+   .wrapper1 .body-btn button{
+    width: 100px;
+    height: 50px;
+    background-color: #fff;
+    margin-left: 4px;
+    text-align:center;
+    color: black;
+    padding: 0px 10px;
+    cursor: pointer;
+    border: solid 2px #0a0909;
+    border-radius: 10px;
+    margin-bottom: 4px;
+   }
+   .wrapper1 .body-btn button:hover{
+    background-color: #064115;
+    color: #fff;
+}
+
+   .wrapper2{
+    display: grid;
+    grid-auto-columns: 21%;
+    gap:3;
+    overflow-x: auto;
+    grid-auto-flow: column;
+    max-height: 120px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-left: 4px;
+    width: 100%;
+   }
+   .wrapper2 .service-type button{
+    width: 100px;
+    height: 60px;
+    text-align: center;
+    background-color: #fff;
+    margin-right: 4px;
+    color: black;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid rgb(26, 26, 73);
+   }
+
+   .wrapper2 .service-type button:hover{
+    background-color: #064115;
+    color: #fff;
+}
+
+   .wrapper3{
+    width: 100%;
+    display: grid;
+    grid-auto-columns: 15%;
+    gap:3;
+    overflow-x: auto;
+    grid-auto-flow: column;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+   }
+   .wrapper3 .washer button{
+    height: 40px;
+    width: 80px;
+    background-color: #fff;
+    color: #080808;
+    margin-left: 4px;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid;
+    text-align: center;
+   }
+   .wrapper3 .washer button:hover{
+    background-color: #064115;
+    color: #fff;
+}
+
+
+
+   .wrapper4{
+    /* max-width: 900px; */
+        /* padding: 15px; */
+        overflow: auto;
+        /* margin: auto; */
+        border-radius: 10px;
+        /* position: relative; */
+}
+table{
+    width: 100%;
+    font-size: 10px;
+    color: #444;
+    white-space: nowrap;
+    border-collapse: collapse;
+    text-align: center;
+}
+table thead th{
+    padding: 15px;
+    background-color: none;
+    margin: 4px;
+    text-align: center;
+}
+table th td{
+    border: 1px solid #000000;
+    
+}
+
+.action_btn{
+    margin-bottom: 10px;
+}
+
+   .action_btn>a{
+    text-decoration: none;
+    color: #444;
+    background: #fff;
+    border: 1px solid;
+    display: inline-block;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 3px;
+    border-radius: 10px;
+    
+}
+.action_btn:hover>a:hover{
+    background-color: #064115;
+    color: #fff;
+}
+.wrapper5 .N-page button{
+    margin-left: 6px;
+    width: 60px;
+    height: 30px;
+    border: 2px solid;
+    text-decoration: none;
+    color: #000000;
+    text-align: center;
+    border-radius: 10px;
+    background-color: #fff;
+}
+.wrapper5 .N-page a{
+    text-decoration: none;
+    color: #000000;
+}
+.wrapper5 .N-page button:hover{
+    background-color: #064115;
+    color: #fff;
+}
+   .vhcl{
+    display: flex;
+   justify-content: space-between;
+}
+.wrapper6 .srvc{
+    display: flex;
+    justify-content: space-between;
+}
+.prc{
+    display: flex;
+    justify-content: space-between;
+}
+ .wrapper6 .tcost{
+    display: flex;
+    justify-content: space-between;
+    background-color: transparent;
+}
+.output{
+    border: 0;
+    margin-left: 4px;
+    background-color: transparent;
+}
+.attendendt{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.payment-sec{
+    display: flex;
+    margin-left: 50px;
+    min-width: 250px;
+    z-index: 10;
+    margin-bottom: 20px;
+}
+.wrapper7{
+    display: flex;
+    justify-content: space-between;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+.wrapper7 .pay-sec button{
+    width: 80px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 10px;
+    text-align: center;
+    border: 2px solid black;
+    cursor: pointer;
+    margin: 5px;
+}
+ .pay-sec button:hover{
+    background-color: #064115;
+    color: #fff;
+}
+
+.wrapper8{
+    display: flex;
+    justify-content: space-between;
+}
+.wrapper8 .p-btn input{
+    width: 80px;
+    height: 40px;
+    background-color: #fff;
+    border: 2px solid;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.wrapper8 .p-btn input:hover{
+    background-color: #064115;
+    color: #fff;
+
+}
+.wrapper8 .c-btn input{
+    width: 80px;
+    height: 40px;
+    background-color: #fff;
+    border: 2px solid;
+    text-align: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.wrapper8 .c-btn input:hover{
+    background-color: #064115;
+    color: #fff;
+}
+
+@media(max-width: 800px){
+    .page-wrapper{
+        flex-wrap: wrap;
+    }
+    .payment-sec{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .wrapper4{
+        /* max-width: 900px; */
+        /* padding: 15px; */
+        overflow: auto;
+        /* margin: auto; */
+        border-radius: 10px;
+        /* position: relative; */}
+}
+
+@media(min-width:801px),(max-width: 1000px){
+    .page-wrapper{
+        flex-wrap: wrap;
+    } 
+    .payment-sec{
+        margin-left: 6px;
+    }
+  
+    .carwash-sec{
+        max-width: 600px;
+       }
+}
+@media(max-width: 500px){
+    .page-wrapper{
+        flex-wrap: wrap;
+    }
+    .payment-sec{
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .wrapper4{
+        /* max-width: 900px; */
+        /* padding: 15px; */
+        overflow: auto;
+        /* margin: auto; */
+        border-radius: 10px;
+        /* position: relative; */}
+
+    .wrapper2{
+        width: 50%;
+        display: grid;
+        gap: 4px;
+        overflow-x: auto;
+        grid-auto-flow: column;
+        max-height: 120px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: 4px;
+       }
+       .wrapper2 .service-type button{
+        width: 5rem;
+       } 
+       
+       .wrapper3{
+        width: 50%;
+        display: grid;
+        gap: 4px;
+        overflow-x: auto;
+        grid-auto-flow: column;
+        max-height: 120px;
+        padding-top: 20px;
+        padding-bottom: 20px;
+        margin-left: 4px;
+        margin-right: 4px;
+
+       }
+       .wrapper3 .washer button{
+        width: 3.6rem;
+        height: 4rem;
+       }
+       .wrapper1{
+        width: 62%;
+        grid-template-columns: auto;
+        grid-auto-flow: wrap;
+       }
+       .wrapper1 .body-btn button{
+        width: 4.7rem;
+       }
+}
+ 

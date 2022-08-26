@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'assets/CSS/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/CSS/users.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="container">
+    <section class="header">
+        <nav>
+            <div>
+                <a href="#" Class="logo"><b>LOGO</b></a>
+                <div class="navigation"><a href="{% url 'main_menu'%}">Home> </a></div> 
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>                    
+                    <span><li>Hello,{{request.user}}</li></span> 
+                    <li>HELP</li> 
+                    <span><li><a href="{% url 'logout' %}">LOGOUT</a></li></span>
+                </ul>  
+            </div> 
+            <i class="fa fa-bars"onclick="showMenu()"></i>        
+        </nav>
+    </section>
+    <section class="Body-table">
+        <table>
+            <thead>
+                <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>User type</th>
+                    <th>Phone Number</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            {% for user in users%}
+            <tbody>
+                <tr>
+                    <td>{{user.first_name}}</td>
+                    <td>{{user.last_name}}</td>
+                    <td>{{user.user_type}}</td>
+                    <td>{{user.phone_number}}</td>
+                    <td>
+                        <span class="action_btn" id="update-btn">
+                            <a href="{% url 'updateUser' user.id %}" class="modal-btn">Update</a>
+                            <a href="{% url 'deleteUser' user.id %}" class="modal-btn">Delete</a>
+                        </span>
+                    </td>
+                    
+                </tr>
+            </tbody>
+            {% endfor %} 
+        </table>
+        <a href="{% url 'createUser' %}"><button class="btn-create" id="create-btn">Create</button> </a> 
+    </section>
+    <script src="{% static 'assets/javascript/main.js' %}"></script> 
+</body>
+</html>
+</html>

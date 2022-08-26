@@ -1,0 +1,112 @@
+
+.Body-table{
+    max-width: 900px;
+    padding: 15px;
+    overflow: auto;
+    margin: auto;
+    border-radius: 10px;
+    position: relative;
+}
+table{
+    width: 100%;
+    font-size: 13px;
+    color: #444;
+    white-space: nowrap;
+    border-collapse: collapse;
+    text-align: center;
+}
+table thead th{
+    padding: 15px;
+    background-color: #26a69a;
+    margin: 4px;
+    text-align: center;
+}
+table th td{
+    border: 1px solid #000000;
+    
+}
+.action_btn{
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 4px;
+    cursor: pointer;
+}
+.action_btn>a{
+    text-decoration: none;
+    color: #444;
+    background: #fff;
+    border: 1px solid;
+    display: inline-block;
+    padding: 7px 20px;
+    font-weight: bold;
+    border-radius: 3px;
+}
+.action_btn>a:nth-child(1) {
+    border-color: #03641b;
+}
+.action_btn>a:nth-child(2) {
+    border-color: rgb(248, 8, 8);
+}
+.action_btn>a:hover {
+    box-shadow: 0 3px 8px #0003;
+}
+.vehicle_update{
+    padding-bottom: 20px;
+    border-radius: 10px;
+    margin-left: 50px;
+    margin-right: 50px;
+    margin-top: 60px;
+    
+}
+.update-body{
+    position: absolute;
+    top: 20%; left:  -200%  /*2rem*/;
+    width: 25rem;
+    height: 18rem;
+    background: #fff;
+    padding: 2rem 2rem;
+    border-radius: .5rem;
+    border: 1px solid;
+    align-items: center;
+}
+.update-body.active{
+    left: 3rem;
+    transition: .4s linear;
+    z-index: 10;
+}
+
+.vehicle-Registration label{
+    display: block;
+}
+.vehicle-Registration input{
+    background-color: #fff;
+    border: 2px solid;
+    display: block;
+    min-width: 300px;
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.save-btn button{
+    width: 100px;
+    border: 2px solid;
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: aqua;
+}
+
+.save-btn button:hover{
+    background-color: green;
+    color: #fff;
+}
+
+@media(max-width: 700px){
+    .update-body.active{
+        width: 95%;
+        left: .5rem
+    }
+
+    
+}

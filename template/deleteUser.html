@@ -1,0 +1,62 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'assets/CSS/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/CSS/body.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Body</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="container">
+    <section class="header">
+        <nav>
+            <div>
+                <a href="#" Class="logo"><b>LOGO</b></a>
+                <div class="navigation"><a href="{% url 'body_type' %}">Body Type> </a></div> 
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>                    
+                    <span><li>Hello,{{request.user}}</li></span> 
+                    <li>HELP</li> 
+                    <span><li><a href="{% url 'logout' %}">LOGOUT</a></li></span>
+                </ul>  
+            </div> 
+            <i class="fa fa-bars"onclick="showMenu()"></i>        
+        </nav>
+    </section>
+    <section>
+     <div class="row">
+        <div class="col-md-6">
+            <div class="card card-body">
+
+                <p>Are you sure you want to delete {{user}} ?</p>
+                <form action="{% url 'deleteUser' user.id %}" method="POST">
+                    {% csrf_token %}
+                    <a class="btn btn-warning" href="{% url 'users' %}">Cancel</a>
+                    <input class="btn btn-danger" type="submit" name="confirm">
+                </form>
+            </div>
+
+        </div>
+
+     </div>   
+       
+
+    </section>
+
+    <script>
+        var navLinks =document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px"
+        }     
+
+    </script>   
+</body>
+</html>

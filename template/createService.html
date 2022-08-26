@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Service</title>
+</head>
+<body>
+    <section>
+    <div>
+            <form action="" method="POST">
+                <div class="header-update">
+                    <h4>Create Service</h4>
+                </div>
+                {% csrf_token %}
+                <div class="service-type">
+                    <label for="Service Type">Service type:</label>
+                    {{form.name}}
+                    
+                </div>
+                <div class="service-type">
+                    <label for="Description">Description:</label>
+                    {{form.description}}
+                </div>
+                    <label for="Description">Body Type:</label>
+                    {{form.category}}
+                </div>
+                <div class="service-type">
+                    <label for="Price">Price:</label>
+                    {{form.price}}
+                </div><br>
+                <div class="service-type">
+                    <label for="available">Available</label>
+                    {{form.available}}
+                </div>
+                <div class="save-btn">
+                    <button>CREATE</button>
+                </div>   
+            </form>   
+        </div>
+        <!--div id="overlay"></div-->
+</section>  
+</body>
+</html>

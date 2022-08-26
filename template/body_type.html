@@ -1,0 +1,146 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'assets/CSS/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/CSS/body.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Body Type</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body class="container">
+    <section class="header">
+        <nav>
+            <div>
+                <a href="#" Class="logo"><b>LOGO</b></a>
+                <div class="navigation"><a href="{% url 'main_menu' %}">Home> </a></div> 
+            </div>
+            <div class="nav-links" id="navLinks">
+                <i class="fa fa-times" onclick="hideMenu()"></i>
+                <ul>                    
+                    <span><li>Hello,{{request.user}}</li></span> 
+                    <li>HELP</li> 
+                    <span><li><a href="{% url 'logout' %}">LOGOUT</a></li></span>
+                </ul> 
+            </div> 
+            <i class="fa fa-bars"onclick="showMenu()"></i>        
+        </nav>
+    </section>
+    <section class="Body-table">
+        
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Body Type</th>
+                    <th>Created at</th>
+                    <th>Updated at</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            {% for category in categories %}
+            <tbody>
+                
+                <tr>
+                    <td>{{category.name}}</td>
+                    <td>{{category.created}}</td>
+                    <td>{{category.updated}}</td>
+                    <td>
+                        <span class="action_btn" id="update-btn">
+                            <a href="{% url 'update_body' category.id %}" class="modal-btn">Update</a>
+                            <!--a href="#" class="modal-btn" id=".update-body">Update</a-->
+                            <a href="{% url 'delete_body' category.id %}" class="modal-btn">Delete</a>
+                        </span>
+                    </td>
+                    
+                </tr>
+            </tbody>
+            {% endfor %}
+
+        </table>
+        <!--a href="#"><button class="btn-create" id="create-btn">Create</button> </a--> 
+        <a href="{% url 'create_body' %}"><button class="btn-create" id="create-btn">Create</button> </a>
+    </section>
+    <section class="body_type_update">
+        <div class="update-body" id="update">
+            <form action="">
+                <div class="header-update">
+                    <h4>Update Body Type</h4>
+                </div>
+                <div class="vehicle-body">
+                    <label for="body type">BODY TYPE:</label>
+                    <input type="text">
+                </div><br>
+                <div class="save-btn">
+                    <button>Save</button>
+                </div>   
+            </form>
+        </div>
+        <!--div id="overlay"></div-->
+    </section> 
+
+    <section  class="body_type_create">
+        <div class="create-body" id="create">
+            <form method="POST" action=" ">
+
+                <div class="header-update">
+                    <h4>Create Body Type</h4>
+                </div>
+                {% csrf_token %}
+                <div class="body_type_create">
+                    <label for="body type">BODY TYPE:</label>
+                    <input type="text">
+                </div><br>
+                <div class="save-btn">
+                    
+                   <button type="submit">Create</button>
+                </div>   
+            </form>
+        </div>
+    </section>
+    <script>
+      
+    var updatebtn = document.getElementsByClassName('modal-btn');
+    for (var j = 0; j < updatebtn.length;j++){
+        updatebtn[j].addEventListener("click",function(){  
+        this.classList.toggle('active');
+        })
+    }
+
+        /*for (var i = 0; i < bodyUpdate.length; i++){
+            document.querySelector('#update-btn').onclick = () =>{
+                bodyUpdate[i].classList.toggle('active');
+                bodyCreate.classList.remove('active');
+            }
+        } */
+          
+           
+    /*let bodyUpdate = document.querySelector('.update-body');
+
+       
+    document.querySelector('#update-btn').onclick = () =>{
+            bodyUpdate.classList.toggle('active');
+            bodyCreate.classList.remove('active');
+        }
+    
+
+        let bodyCreate = document.querySelector('.create-body');
+
+        document.querySelector('#create-btn').onclick = () =>{
+            bodyCreate.classList.toggle('active');
+            bodyUpdate.classList.remove('active');
+        } */
+
+        var navLinks =document.getElementById("navLinks");
+        function showMenu(){
+            navLinks.style.right = "0";
+        }
+        function hideMenu(){
+            navLinks.style.right = "-200px"
+        }     
+
+    </script>   
+</body>
+</html>

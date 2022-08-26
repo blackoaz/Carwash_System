@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="{% static 'assets/CSS/main.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/CSS/carwashsys.css' %}">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="wrapper4">
+        <table>
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Service</th>
+                    <th>Registration</th>
+                    <th>Body Type</th>
+                    <th>Price</th>
+                    <th>Attendant</th>
+                    <th>Commision</th>
+                    <th>Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for sale in sales %}
+                    <tr>
+                        <td>{{sale.created}}</td>
+                        <td>{{sale.service.name}}</td>
+                        <td>{{sale.vehicle.registration}}</td>
+                        <td>{{sale.vehicle.category}}</td>
+                        <td>{{sale.service.price}}</td>
+                        <td>{{sale.staff.first_name}}</td>
+                        <td>{{sale.commision}}</td>
+                        <td>
+                            <span class="action_btn">
+                            <a href="{% url 'carwash'%}">PAY</a>
+                            </span>
+                        </td>
+                        
+                    </tr>
+                {% endfor %}
+            </tbody>
+
+        </table>
+    </div>
+
+    <script src="{% static 'assets/javascript/main.js' %}"></script>
+</body>
+</html>
