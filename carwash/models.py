@@ -8,8 +8,6 @@ from django.db import models
 from main.models import Common
 
 # Create your models here.
-
-from unicodedata import category
 from django.db import models
 import uuid
 

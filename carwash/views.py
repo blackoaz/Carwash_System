@@ -38,24 +38,28 @@ def index(request):
     staffs = Staff.objects.all()
     form = VehicleForm() 
     form = CarwashSaleForm() 
-    form = VehicleForm()
-    if request.method == 'POST':
-        form = VehicleForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.info(request,'vehicle created successfully proceed payment')
-        elif form is not None:
-            messages.info(request,'vehicle already exist or does not comply with Registration Format')    
-        return redirect('carwash') 
-    form = CarwashSaleForm()        
-    if request.method == 'POST':
-        form = CarwashSaleForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.info(request,'Sale Registered successfully')   
-            return redirect('carwash')                       
+
     context = {'categories':categories,'services':services,'sales':sales,'staffs':staffs,'vehicles':vehicle,'form':form,'form':form}
     return render(request,'carwashsys.html',context)
+
+def create_sale(request):
+    
+    if request.method == 'POST':
+        vehicle = request.POST['vehicle']
+        Category = request.POST['Category']
+        Service = request.POST['Service']
+        Staff = request.POST['Staff']
+        payment_status = request.POST['Payment_status']
+
+        sale = CarwashSale(vehicle=vehicle,category=Category,service=Service,staff=Staff,Payment_status=payment_status)
+        sale.save()
+        messages.info(request,'Sale Added successfully')
+        return redirect('carwash')
+    return render(request,'carwashsys.html')    
+
+
+
+
 
 
 def recent(request):
@@ -212,30 +216,30 @@ def deleteVehicle(request, pk):
     return render(request, 'deleteVehicle.html',context)
 
 #sale
-def register_vehicle(request):
-    form = VehicleForm()
-    if request.method == 'POST':
-        form = VehicleForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.info(request,'vehicle created successfully proceed payment')
-        elif form is not None:
-            messages.info(request,'vehicle already exist or does not comply with Registration Format')    
-        return redirect('carwash')
-    context = {'form':form}               
-    return render(request,'carwashsys.html',context) 
+# def register_vehicle(request):
+#     form = VehicleForm()
+#     if request.method == 'POST':
+#         form = VehicleForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.info(request,'vehicle created successfully proceed payment')
+#         elif form is not None:
+#             messages.info(request,'vehicle already exist or does not comply with Registration Format')    
+#         return redirect('carwash')
+#     context = {'form':form}               
+#     return render(request,'carwashsys.html',context) 
 
 
-def register_sale(request):
-    form = CarwashSaleForm()        
-    if request.method == 'POST':
-        form = CarwashSaleForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.info(request,'Sale Registered successfully')   
-            return redirect('carwash')
-    context = {'form':form}               
-    return render(request,'carwashsys.html',context) 
+# def register_sale(request):
+#     form = CarwashSaleForm()        
+#     if request.method == 'POST':
+#         form = CarwashSaleForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.info(request,'Sale Registered successfully')   
+#             return redirect('carwash')
+#     context = {'form':form}               
+#     return render(request,'carwashsys.html',context) 
 
 #user registration and login
 def registerUser(request):

@@ -49,8 +49,8 @@
                     <td>{{category.updated}}</td>
                     <td>
                         <span class="action_btn" id="update-btn">
-                            <a href="{% url 'update_body' category.id %}" class="modal-btn">Update</a>
-                            <!--a href="#" class="modal-btn" id=".update-body">Update</a-->
+                            <!-- <a href="{% url 'update_body' category.id %}" class="modal-btn">Update</a> -->
+                            <a href="#" class="modal-btn" id=".update-body">Update</a>
                             <a href="{% url 'delete_body' category.id %}" class="modal-btn">Delete</a>
                         </span>
                     </td>
@@ -103,9 +103,10 @@
     <script>
       
     var updatebtn = document.getElementsByClassName('modal-btn');
-    for (var j = 0; j < updatebtn.length;j++){
-        updatebtn[j].addEventListener("click",function(){  
-        this.classList.toggle('active');
+    for (var i = 0; i < updatebtn.length;i++){
+        updatebtn[i].addEventListener("click",function(){  
+            updatebtn.classList.toggle('active');
+            bodyCreate.classList.remove('active');
         })
     }
 
@@ -141,6 +142,7 @@
             navLinks.style.right = "-200px"
         }     
 
-    </script>   
+    </script>  
+    <script src="{% static 'assets/javascript/main.js' %}"></script> 
 </body>
 </html>

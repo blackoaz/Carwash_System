@@ -51,10 +51,13 @@
                 <div class="body-btn"><button id="body-btn">{{ category.name }}</button></div>  
                 {% endfor %}  
             </div>
-    
             <div class="wrapper2">
                 {% for service in services %}
-                <div class="service-type"><button id="servce-btn">{{service.name}}</button></div>
+                <div class="service-type"><button id="servce-btn">
+                    {{service.name}} <br>
+                    {{service.category}}
+                    {{service.price}}
+                </button></div>
                 {% endfor %}  
             </div>
             <div class="wrapper3">
@@ -105,14 +108,14 @@
         <div class="col-md-4 border">
             <div class="wrapper6">
                 <h3>Customer Details</h3>
-                <form action="" method="POST">
+                <form action="{% url 'create_sale' %}" method="POST">
                     {% csrf_token %}
                 <div class="vhcl" >
-                    <label for="Vehicle">Vehicle: </label>
+                    <label for="vehicle">Vehicle: </label>
                     <input type="text" id="numbplate">
                 </div><br>
                 <div class="vhcl">
-                    <label for="Vehicle">Body Type: </label>
+                    <label for="Category">Body Type: </label>
                     <input type="text" id="bodyType">
                 </div><br>
                 <div class="srvc">
@@ -120,11 +123,11 @@
                     <input type="text" id="serviceType">
                 </div><br>
                 <div class="srvc">
-                    <label for="Service">Staff: </label>
+                    <label for="Staff">Staff: </label>
                     <input type="text" id="staff-washing">
                 </div><br>
                 <div class="vhcl">
-                    <label for="attendent">Payment Status: </label>
+                    <label for="Payment_status">Payment Status: </label>
                     <input type="text">
                 </div><br>
             
