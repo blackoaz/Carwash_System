@@ -52,6 +52,7 @@ TENANT_APPS = (
     'phonenumber_field',
     'rest_framework',
     'rest_framework_simplejwt',
+    'widget_tweaks',
     
     # your tenant-specific apps
     'carwash',

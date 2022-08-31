@@ -96,7 +96,7 @@ class CarwashSale(models.Model):
     ('Paid', 'Paid'), 
     ('Unpaid', 'Unpaid'),
     )
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT)
+    vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT )
     category = models.ForeignKey(Category, on_delete=models.PROTECT)  
     service = models.ForeignKey(Service, on_delete=models.PROTECT) 
     staff = models.ForeignKey(Staff, on_delete=models.PROTECT)

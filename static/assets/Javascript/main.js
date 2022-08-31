@@ -37,19 +37,13 @@ for(var i = 0; i < servicebtns.length; i++){
         
     })
 }
-//Adding staff  to sale form
+//Adding staff  to sale form 'operator-btn' 'washer'
 var staffbtns = document.getElementsByClassName('washer')
 
 for(var i = 0; i < staffbtns.length; i++){
     staffbtns[i].addEventListener('click', function() {
-        var staffbtns = document.getElementById('operator-btn').value
+      var  staffbtns = document.getElementById('operator-btn').innerText
         document.getElementById('staff-washing').value = staffbtns
-
-        console.log('staffbtns')
-
-        
     })
 }
-
-
 

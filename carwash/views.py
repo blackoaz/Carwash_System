@@ -45,16 +45,17 @@ def index(request):
 def create_sale(request):
     
     if request.method == 'POST':
-        vehicle = request.POST['vehicle']
-        Category = request.POST['Category']
-        Service = request.POST['Service']
-        Staff = request.POST['Staff']
-        payment_status = request.POST['Payment_status']
-
-        sale = CarwashSale(vehicle=vehicle,category=Category,service=Service,staff=Staff,Payment_status=payment_status)
-        sale.save()
-        messages.info(request,'Sale Added successfully')
-        return redirect('carwash')
+        if request.POST.get('Vehicle') and request.POST.get('Category') and request.POST.get('Service') and request.POST.get('Staff') and request.POST.get('Payment_status'):
+            sale = CarwashSale()
+            sale.vehicle = request.POST.get('Vehicle')
+            sale.category = request.POST.get('Category')
+            sale.service = request.POST.get('Service')
+            sale.staff = request.POST.get('Staff')
+            sale.Payment_status = request.POST.get('Payment_status')
+            sale.save()
+            messages.info(request,'Sale Added successfully')
+            print('submitted successsfully')
+            return redirect('carwash')
     return render(request,'carwashsys.html')    
 
 
@@ -230,16 +231,16 @@ def deleteVehicle(request, pk):
 #     return render(request,'carwashsys.html',context) 
 
 
-# def register_sale(request):
-#     form = CarwashSaleForm()        
-#     if request.method == 'POST':
-#         form = CarwashSaleForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.info(request,'Sale Registered successfully')   
-#             return redirect('carwash')
-#     context = {'form':form}               
-#     return render(request,'carwashsys.html',context) 
+def register_sale(request):
+    form = CarwashSaleForm()        
+    if request.method == 'POST':
+        form = CarwashSaleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.info(request,'Sale Registered successfully')   
+            return redirect('carwash')
+    context = {'form':form}               
+    return render(request,'carwashsys.html',context) 
 
 #user registration and login
 def registerUser(request):
