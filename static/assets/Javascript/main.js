@@ -8,13 +8,13 @@ document.getElementById('submit-btn').addEventListener('click', () =>{
 });
 
 //Adding Body type to sale form *body-btn
-var bodybtns = document.getElementsByClassName('body-btn')
+let bodybtns = document.getElementsByClassName('body-btn')
 
-for(var i = 0; i < bodybtns.length; i++){
+for(let i = 0; i < bodybtns.length; i++){
     bodybtns[i].addEventListener('click', function() {
         
-        var bodybtns = document.getElementById('body-btn').innerText
-        document.getElementById('bodyType').value = bodybtns
+        let bodydata = document.getElementById('bodyinput').innerText
+        document.getElementById('bodyType').value += bodydata
 
         console.log('bodybtns')
         
@@ -45,5 +45,6 @@ for(var i = 0; i < staffbtns.length; i++){
       var staffbtns = document.getElementById('operator-btn').innerText
         document.getElementById('staff-washing').value = staffbtns
     })
+    console.log(staffbtns)
 }
 

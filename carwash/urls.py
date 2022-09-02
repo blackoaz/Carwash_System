@@ -13,7 +13,6 @@ urlpatterns = [
     #path('sales/<int:pk>', SaleDetail.as_view(), name='get-update-delete-sale'),
     path('home/',views.home, name ='home'),
     path('carwash/', views.index, name = 'carwash'),
-    path('create_sale', views.create_sale, name = 'create_sale'),
     path('more_vehicles/', views.recent, name = 'recentWash'),
     path('menu/', views.main, name = 'main_menu'),
     path('body/', views.body_type, name = 'body_type'),

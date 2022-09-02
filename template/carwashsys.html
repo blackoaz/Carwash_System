@@ -38,6 +38,7 @@
     <div class="row">
         <div class="col-md-8 border">
             <div class="">
+                <!-- Vehicle registration section-->
                 <h1>Enter Vehicle Details</h1>
                 <p>{% for message in messages %}</p>
                 <div class="alert alert-success"><h6 font-size="60px" font-weight="bold">{{ message }}</h6></div>
@@ -49,7 +50,7 @@
             </div>
             <div class="wrapper1">
                 {% for category in categories %}
-                <div class="body-btn"><button id="body-btn">{{ category.name }}</button></div>  
+                <div class="body-btn"><button id="bodyinput">{{ category.name }}</button></div>  
                 {% endfor %}  
             </div>
             <div class="wrapper2">
@@ -64,6 +65,8 @@
                 <div class="washer"><button id="operator-btn">{{staff.first_name}} </button></div>
                 {% endfor %}
             </div>
+<!-- washed vehicles but unpaid, table-->
+
             <div class="wrapper4">
                 <table>
                     <thead>
@@ -107,46 +110,29 @@
         <div class="col-md-4 border">
             <div class="wrapper6">
                 <h3>Customer Details</h3>
+<!--                Carwash sale form section                                               -->
                 <form action="{% url 'register_sale' %}" method="POST">
                     {% csrf_token %}
                 <div class="vhcl" >
                     <label for="vehicle">Vehicle: </label>
-                        <!-- {{form.vehicle}} -->
                         {% render_field form.vehicle id="numbplate" %}
-                    <!-- <input type="text" id="numbplate"> -->
                 </div><br>
                 <div class="vhcl">
                     <label for="Category">Body Type: </label>
-                    <!-- <div id="bodyType">{{form.category}}</div> -->
                     {% render_field form.category id="bodyType" %}
-                    <!-- <input type="text" id="bodyType"> -->
                 </div><br>
                 <div class="srvc">
                     
                     <label for="Service">Service: </label>
-                    <!-- {{form.service}} -->
                     {% render_field form.service id="serviceType" %}
-                    
-                    <!-- <select name="service" id="">
-                        {% for service in services %}
-                        <option value="">{{service.name}}</option>
-                        {% endfor %}
-                    </select> -->
-                    <!-- <input type="text" id="serviceType"> -->
                 </div><br>
                 <div class="srvc">
-                    <label for="Staff" id="staff-washing">Staff: </label>
-                    <!-- {{form.staff}} -->
+                    <label for="Staff">Staff: </label>
                     {% render_field form.staff id="staff-washing" %}
-
-                    <!-- <input type="text" id="staff-washing"> -->
                 </div><br>
                 <div class="vhcl">
                     <label for="Payment_status">Payment Status: </label>
-                    <!-- {{form.Payment_status}} -->
                     {% render_field form.Payment_status id="staff-washing" %}
-                    <!-- {% render_field form.Payment_status %} -->
-                    <!-- <input type="text"> -->
                 </div><br>
             
                 <div class="wrapper7">

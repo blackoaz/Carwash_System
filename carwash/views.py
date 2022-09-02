@@ -42,27 +42,6 @@ def index(request):
     context = {'categories':categories,'services':services,'sales':sales,'staffs':staffs,'vehicles':vehicle,'form':form,'form':form}
     return render(request,'carwashsys.html',context)
 
-def create_sale(request):
-    
-    if request.method == 'POST':
-        if request.POST.get('Vehicle') and request.POST.get('Category') and request.POST.get('Service') and request.POST.get('Staff') and request.POST.get('Payment_status'):
-            sale = CarwashSale()
-            sale.vehicle = request.POST.get('Vehicle')
-            sale.category = request.POST.get('Category')
-            sale.service = request.POST.get('Service')
-            sale.staff = request.POST.get('Staff')
-            sale.Payment_status = request.POST.get('Payment_status')
-            sale.save()
-            messages.info(request,'Sale Added successfully')
-            print('submitted successsfully')
-            return redirect('carwash')
-    return render(request,'carwashsys.html')    
-
-
-
-
-
-
 def recent(request):
     sales = CarwashSale.objects.filter(Payment_status='Unpaid')
     context = {'sales':sales}
