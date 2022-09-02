@@ -4,7 +4,7 @@ function PlateOutput() {
     document.getElementById('numbplate').value = Nump
 }
 document.getElementById('submit-btn').addEventListener('click', () =>{
-    let Nump = document.getElementById('numberPlate').value = " "
+    let Nump = document.getElementsByClassName('numberPlate').value = " "
 });
 
 //Adding Body type to sale form *body-btn
@@ -28,7 +28,7 @@ var servicebtns = document.getElementsByClassName('service-type')
 for(var i = 0; i < servicebtns.length; i++){
     servicebtns[i].addEventListener('click', function() {
         
-        var servicebtns = document.getElementById('servce-btn').innerHTML
+        var servicebtns = document.getElementById('servce-btn').innerText
         document.getElementById('serviceType').value = servicebtns
         //servicebtns.style.backgroundColor = "Green"  service-type
 
@@ -42,7 +42,7 @@ var staffbtns = document.getElementsByClassName('washer')
 
 for(var i = 0; i < staffbtns.length; i++){
     staffbtns[i].addEventListener('click', function() {
-      var  staffbtns = document.getElementById('operator-btn').innerText
+      var staffbtns = document.getElementById('operator-btn').innerText
         document.getElementById('staff-washing').value = staffbtns
     })
 }

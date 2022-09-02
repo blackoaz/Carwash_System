@@ -105,7 +105,7 @@ WSGI_APPLICATION = 'cwwms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': os.getenv('DB_NAME', 'cwwms_database'),
+        'NAME': os.getenv('DB_NAME', 'Carwash_Database'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 12345),
         'HOST': os.getenv('HOST', 'localhost'),

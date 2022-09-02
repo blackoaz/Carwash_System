@@ -1,4 +1,5 @@
 {% load static %}
+{% load widget_tweaks %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,8 +43,8 @@
                 <div class="alert alert-success"><h6 font-size="60px" font-weight="bold">{{ message }}</h6></div>
         
                 {% endfor %}
-                <input class="search-enter" type="text" placeholder="Enter Vehicle Number Plate" id="numberPlate" name="registration">
-                <input class="search-enter" type="text" placeholder="Enter Body Type" id="body_type" name="category">
+                <input class="search-enter" type="text" placeholder="Enter Vehicle Number Plate" id="numberPlate">
+                <!-- <input class="search-enter" type="text" placeholder="Enter Body Type" id="body_type" name="category"> -->
                 <input type="submit" value="Enter" class="btn-enter" onclick="PlateOutput()" id="submit-btn"> 
             </div>
             <div class="wrapper1">
@@ -82,10 +83,10 @@
                         <tr>
                             <td>{{sale.created}}</td>
                             <td>{{sale.service.name}}</td>
-                            <td>{{sale.vehicle.registration}}</td>
-                            <td>{{sale.vehicle.category}}</td>
+                            <td>{{sale.vehicle}}</td>
+                            <td>{{sale.category}}</td>
                             <td>{{sale.service.price}}</td>
-                            <td>{{sale.staff.first_name}}</td>
+                            <td>{{sale.staff}}</td>
                             <td>{{sale.commision}}</td>
                             <td>
                                 <span class="action_btn">
@@ -110,27 +111,41 @@
                     {% csrf_token %}
                 <div class="vhcl" >
                     <label for="vehicle">Vehicle: </label>
-            <div id="numbplate">{{form.vehicle}}</div>
+                        <!-- {{form.vehicle}} -->
+                        {% render_field form.vehicle id="numbplate" %}
                     <!-- <input type="text" id="numbplate"> -->
                 </div><br>
                 <div class="vhcl">
                     <label for="Category">Body Type: </label>
-                    <div id="bodyType">{{form.category}}</div>
+                    <!-- <div id="bodyType">{{form.category}}</div> -->
+                    {% render_field form.category id="bodyType" %}
                     <!-- <input type="text" id="bodyType"> -->
                 </div><br>
                 <div class="srvc">
+                    
                     <label for="Service">Service: </label>
-                    {{form.service}}
+                    <!-- {{form.service}} -->
+                    {% render_field form.service id="serviceType" %}
+                    
+                    <!-- <select name="service" id="">
+                        {% for service in services %}
+                        <option value="">{{service.name}}</option>
+                        {% endfor %}
+                    </select> -->
                     <!-- <input type="text" id="serviceType"> -->
                 </div><br>
                 <div class="srvc">
                     <label for="Staff" id="staff-washing">Staff: </label>
-                    {{form.staff}}
+                    <!-- {{form.staff}} -->
+                    {% render_field form.staff id="staff-washing" %}
+
                     <!-- <input type="text" id="staff-washing"> -->
                 </div><br>
                 <div class="vhcl">
                     <label for="Payment_status">Payment Status: </label>
-                    {{form.Payment_status}}
+                    <!-- {{form.Payment_status}} -->
+                    {% render_field form.Payment_status id="staff-washing" %}
+                    <!-- {% render_field form.Payment_status %} -->
                     <!-- <input type="text"> -->
                 </div><br>
             

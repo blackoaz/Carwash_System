@@ -96,10 +96,15 @@ class CarwashSale(models.Model):
     ('Paid', 'Paid'), 
     ('Unpaid', 'Unpaid'),
     )
-    vehicle = models.ForeignKey(Vehicle, on_delete=models.PROTECT )
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)  
+    vehicle = models.CharField(max_length=10, unique=True, validators=[
+            RegexValidator(
+                regex='^[A-Z]{2,4}[0-9]{3,4}[A-Z]{1}$',
+                message="Vehicle Registration doesn't comply",
+            ),
+        ])
+    category = models.CharField(max_length=100, unique=True)  
     service = models.ForeignKey(Service, on_delete=models.PROTECT) 
-    staff = models.ForeignKey(Staff, on_delete=models.PROTECT)
+    staff = models.CharField(max_length=100)
     commision = models.PositiveIntegerField(default = 0)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
@@ -121,6 +126,17 @@ class CarwashSale(models.Model):
 
 def __str__(self):
     return self.vehicle.registration
+
+
+    # category = models.ForeignKey(Category, on_delete=models.PROTECT)  
+    # service = models.ForeignKey(Service, on_delete=models.PROTECT) 
+    # staff = models.ForeignKey(Staff, on_delete=models.PROTECT)
+    # commision = models.PositiveIntegerField(default = 0)
+    # created = models.DateTimeField(auto_now_add=True)
+    # updated = models.DateTimeField(auto_now=True)
+    # Payment_status = models.CharField(max_length=30, choices=PAYMENT_STATUS, default='Unpaid')
+    # uid = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
+
 
 
 

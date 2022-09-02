@@ -1,5 +1,5 @@
 
-from ast import If
+from ast import If, Return
 from multiprocessing import context
 from unicodedata import category
 from urllib import request
@@ -194,19 +194,33 @@ def deleteService(request, pk):
     
 
 #CRUD Operations for Vehicles registered
-def updateVehicle(request, pk):
-
-    vehicle = Vehicle.objects.get(id=pk)
-    form = VehicleForm(instance=vehicle)
-    form = VehicleForm()
-    if request.method == 'POST':
-        #print("printing Post",request.POST)
-        form = VehicleForm(request.POST,instance=vehicle)
+def updateVehicle(request, pk=0):
+    if request.method == 'GET':
+        if id == 0:
+            form = VehicleForm()
+        else:
+            vehicle = Vehicle.objects.get(id=pk)
+            form = VehicleForm(instance=vehicle)
+        return render (request,'updateVehicle.html',{'form':form})        
+    else:
+        form = VehicleForm(request.POST)
         if form.is_valid():
             form.save()
             return redirect('vehicles')
-    context = {'form':form}
-    return render (request,'updateVehicle.html',context)
+
+
+
+    # vehicle = Vehicle.objects.get(id=pk)
+    # form = VehicleForm(instance=vehicle)
+    # form = VehicleForm()
+    # if request.method == 'POST':
+    #     #print("printing Post",request.POST)
+    #     form = VehicleForm(request.POST,instance=vehicle)
+    #     if form.is_valid():
+    #         form.save()
+    #         return redirect('vehicles')
+    # context = {'form':form}
+    
 
 def deleteVehicle(request, pk):
     vehicle = Vehicle.objects.get(id=pk)
@@ -238,7 +252,7 @@ def register_sale(request):
         if form.is_valid():
             form.save()
             messages.info(request,'Sale Registered successfully')   
-            return redirect('carwash')
+            return redirect('carwash')       
     context = {'form':form}               
     return render(request,'carwashsys.html',context) 
 
