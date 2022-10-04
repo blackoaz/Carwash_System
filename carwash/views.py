@@ -10,16 +10,19 @@ from rest_framework import generics, serializers, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework.authentication import SessionAuthentication, BasicAuthentication
+from rest_framework.permissions import IsAuthenticated
 from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import auth,messages
 # Create your views here.
-from .serializers import CategorySerializer,ServiceSerializer, VehicleSerializer
+from .serializers import CategorySerializer,ServiceSerializer, VehicleSerializer,CarwashSaleSerializer,StaffSerializer
 from .models import CarwashSale, Category,Service, Staff, Vehicle
 from users.models import CustomUser
 from .forms import *
 from django.contrib.auth.forms import UserCreationForm
+from . filters import *
 
 
 
@@ -46,6 +49,18 @@ def recent(request):
     sales = CarwashSale.objects.filter(Payment_status='Unpaid')
     context = {'sales':sales}
     return render(request,'recent.html',context)
+
+def payment(request,pk):
+    CarwashSale.objects.filter(uid=pk).update(Payment_status='Paid')
+    return redirect('paidVehicles')
+
+
+def paid_vehicles(request):
+    sales = CarwashSale.objects.filter(Payment_status='Paid')
+    myFilter = CarwashSaleFilter(request.GET,queryset=sales)
+    paginate_by = 10
+    context = {'sales':sales,'paginate_by':paginate_by,'myFilter':myFilter}
+    return render(request,'paidvehicles.html',context)
 
 def body_type(request):
     categories = Category.objects.all()
@@ -115,11 +130,12 @@ def createUser(request):
     context = {'form':form}
     return render(request,'createUser.html',context)
 
-def updateUser(request, pk):
+def updateUser(request, pk=0):
 
+    form = CustomUserForm()
     user = CustomUser.objects.get(id=pk)
     form = CustomUserForm(instance=user)
-    form = CustomUserForm()
+    
     if request.method == 'POST':
         #print("printing Post",request.POST)
         form = CustomUserForm(request.POST,instance=user)
@@ -150,9 +166,9 @@ def createService(request):
     return render(request,'createService.html',context)
 
 def updateService(request, pk):
+    form = ServiceForm()
     service = Service.objects.get(uid=pk)
     form = ServiceForm(instance=service)
-    form = ServiceForm()
     if request.method == 'POST':
         #print("printing Post",request.POST)
         form = ServiceForm(request.POST,instance=service)
@@ -227,11 +243,11 @@ def deleteVehicle(request, pk):
 def register_sale(request):
     form = CarwashSaleForm()        
     if request.method == 'POST':
-        form = CarwashSaleForm(request.POST)
+        form = CarwashSaleForm(request.POST.get)
         if form.is_valid():
             form.save()
             messages.info(request,'Sale Registered successfully')   
-            return redirect('carwash')       
+            return redirect('carwash')          
     context = {'form':form}               
     return render(request,'carwashsys.html',context) 
 
@@ -295,254 +311,254 @@ def logOut(request):
 
 
 #classbased view
-class vehicleApiView(APIView):
+# class vehicleApiView(APIView):
 
-    def get(self,request):
-        Vehicles = Vehicle.objects.all()
-        serializer = VehicleSerializer(Vehicles, many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         Vehicles = Vehicle.objects.all()
+#         serializer = VehicleSerializer(Vehicles, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = VehicleSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
+#     def post(self, request):
+#         serializer = VehicleSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  
 
-class vehicletDetail(APIView):
-    """
-    Retrieve, update or delete a snippet instance.
-    """
-    def get_object(self, pk):
-        try:
-            return Vehicle.objects.get(pk=pk)
-        except Vehicle.DoesNotExist:
-            raise Http404
+# class vehicletDetail(APIView):
+#     """
+#     Retrieve, update or delete a snippet instance.
+#     """
+#     def get_object(self, pk):
+#         try:
+#             return Vehicle.objects.get(pk=pk)
+#         except Vehicle.DoesNotExist:
+#             raise Http404
 
-    def get(self, request, pk, format=None):
-        Vehicle = self.get_object(pk)
-        serializer = VehicleSerializer(Vehicle)
-        return Response(serializer.data)
+#     def get(self, request, pk, format=None):
+#         Vehicle = self.get_object(pk)
+#         serializer = VehicleSerializer(Vehicle)
+#         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        Vehicle = self.get_object(pk)
-        serializer = VehicleSerializer(Vehicle, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def put(self, request, pk, format=None):
+#         Vehicle = self.get_object(pk)
+#         serializer = VehicleSerializer(Vehicle, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        Vehicle = self.get_object(pk)
-        Vehicle.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
-#Category API
-class CategoryApiView(APIView):
+#     def delete(self, request, pk, format=None):
+#         Vehicle = self.get_object(pk)
+#         Vehicle.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
+# #Category API
+# class CategoryApiView(APIView):
 
-    def get(self,request):
-        Categories = Category.objects.all()
-        serializer = CategorySerializer(Categories, many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         Categories = Category.objects.all()
+#         serializer = CategorySerializer(Categories, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = CategorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+#     def post(self, request):
+#         serializer = CategorySerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-class CategoryDetail(APIView):
-    """
-    Retrieve, update or delete a snippet instance.
-    """
-    def get_object(self, pk):
-        try:
-            return Category.objects.get(pk=pk)
-        except Category.DoesNotExist:
-            raise Http404
+# class CategoryDetail(APIView):
+#     """
+#     Retrieve, update or delete a snippet instance.
+#     """
+#     def get_object(self, pk):
+#         try:
+#             return Category.objects.get(pk=pk)
+#         except Category.DoesNotExist:
+#             raise Http404
 
-    def get(self, request, pk, format=None):
-        category = self.get_object(pk)
-        serializer = CategorySerializer(category)
-        return Response(serializer.data)
+#     def get(self, request, pk, format=None):
+#         category = self.get_object(pk)
+#         serializer = CategorySerializer(category)
+#         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        Vehicle = self.get_object(pk)
-        serializer = CategorySerializer(Vehicle, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def put(self, request, pk, format=None):
+#         Vehicle = self.get_object(pk)
+#         serializer = CategorySerializer(Vehicle, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        category = self.get_object(pk)
-        category.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#     def delete(self, request, pk, format=None):
+#         category = self.get_object(pk)
+#         category.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 
-#Service Api
-class ServiceApiView(APIView):
+# #Service Api
+# class ServiceApiView(APIView):
 
-    def get(self,request):
-        services = Service.objects.all()
-        serializer = ServiceSerializer(services, many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         services = Service.objects.all()
+#         serializer = ServiceSerializer(services, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = ServiceSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+#     def post(self, request):
+#         serializer = ServiceSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-class ServiceDetail(APIView):
-    """
-    Retrieve, update or delete a snippet instance.
-    """
-    def get_object(self, pk):
-        try:
-            return Service.objects.get(pk=pk)
-        except Category.DoesNotExist:
-            raise Http404
+# class ServiceDetail(APIView):
+#     """
+#     Retrieve, update or delete a snippet instance.
+#     """
+#     def get_object(self, pk):
+#         try:
+#             return Service.objects.get(pk=pk)
+#         except Category.DoesNotExist:
+#             raise Http404
 
-    def get(self, request, pk, format=None):
-        category = self.get_object(pk)
-        serializer = ServiceSerializer(category)
-        return Response(serializer.data)
+#     def get(self, request, pk, format=None):
+#         category = self.get_object(pk)
+#         serializer = ServiceSerializer(category)
+#         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        Service = self.get_object(pk)
-        serializer = ServiceSerializer(Service, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def put(self, request, pk, format=None):
+#         Service = self.get_object(pk)
+#         serializer = ServiceSerializer(Service, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        Service = self.get_object(pk)
-        Service.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#     def delete(self, request, pk, format=None):
+#         Service = self.get_object(pk)
+#         Service.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
-"""Sale item
-class SaleItemApiView(APIView):
+# #CarwashSale item
+# class CarwashSaleItemApiView(APIView):
 
-    def get(self,request):
-        saleItem = SaleItem.objects.all()
-        serializer = SaleItemSerializer(saleItem, many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         CarwashsaleItem = CarwashSale.objects.all()
+#         serializer = CarwashSaleSerializer(CarwashsaleItem, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = SaleItemSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+#     def post(self, request):
+#         serializer = CarwashSaleSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-class SaleItemDetail(APIView):
+# class CarwashSaleItemDetail(APIView):
     
-#Retrieve, update or delete a snippet instance.
-   def get_object(self, pk):
-        try:
-            return SaleItem.objects.get(pk=pk)
-        except Category.DoesNotExist:
-            raise Http404
+# #Retrieve, update or delete a snippet instance.
+#     def get_object(self, pk):
+#             try:
+#                 return CarwashSale.objects.get(uid=pk)
+#             except CarwashSale.DoesNotExist:
+#                 raise Http404
 
-    def get(self, request, pk, format=None):
-        SaleItem = self.get_object(pk)
-        serializer = SaleItemSerializer(category)
-        return Response(serializer.data)
+#     def get(self, request, pk, format=None):
+#         CarwashSaleItem = self.get_object(pk)
+#         serializer = CarwashSaleSerializer(CarwashSaleItem)
+#         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        SaleItem = self.get_object(pk)
-        serializer = SaleItemSerializer(Service, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def put(self, request, pk, format=None):
+#         CarwashSaleItem = self.get_object(pk)
+#         serializer = CarwashSaleSerializer(CarwashSaleItem, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        SaleItem = self.get_object(pk)
-        SaleItem.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#     def delete(self, request, pk, format=None):
+#         CarwashSaleItem = self.get_object(pk)
+#         CarwashSaleItem.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
-#sale API
-class SaleApiView(APIView):
+# #Staff API
+# class StaffApiView(APIView):
 
-    def get(self,request):
-        sale = Sale.objects.all()
-        serializer = SaleSerializer(sale, many=True)
-        return Response(serializer.data)
+#     def get(self,request):
+#         sale = Staff.objects.all()
+#         serializer = StaffSerializer(sale, many=True)
+#         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = SaleSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+#     def post(self, request):
+#         serializer = StaffSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
 
-class SaleDetail(APIView):
+# class StaffDetail(APIView):
 
-    #Retrieve, update or delete a snippet instance.
+#     #Retrieve, update or delete a snippet instance.
 
-    def get_object(self, pk):
-        try:
-            return Sale.objects.get(pk=pk)
-        except Sale.DoesNotExist:
-            raise Http404
+#     def get_object(self, pk):
+#         try:
+#             return Staff.objects.get(pk=pk)
+#         except Staff.DoesNotExist:
+#             raise Http404
 
-    def get(self, request, pk, format=None):
-        Sale = self.get_object(pk)
-        serializer = SaleSerializer(category)
-        return Response(serializer.data)
+#     def get(self, request, pk, format=None):
+#         staff = self.get_object(pk)
+#         serializer = StaffSerializer(staff)
+#         return Response(serializer.data)
 
-    def put(self, request, pk, format=None):
-        Sale = self.get_object(pk)
-        serializer = SaleSerializer(Sale, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+#     def put(self, request, pk, format=None):
+#         staff = self.get_object(pk)
+#         serializer = StaffSerializer(staff, data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk, format=None):
-        Sale = self.get_object(pk)
-        Sale.delete()
-        return Response(status=status.HTTP_204_NO_CONTENT)
+#     def delete(self, request, pk, format=None):
+#         staff = self.get_object(pk)
+#         staff.delete()
+#         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-"""
-#Generics based API
-#CreateView, UpdateView, DeleteView, ListView, DetailView
+# """
+# #Generics based API
+# #CreateView, UpdateView, DeleteView, ListView, DetailView
 
-class CategoryList(generics.ListCreateAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+# class CategoryList(generics.ListCreateAPIView):
+#     queryset = Category.objects.all()
+#     serializer_class = CategorySerializer
     
-class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
+# class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Category.objects.all()
+#     serializer_class = CategorySerializer
     
-class VehicleList(generics.ListCreateAPIView):
-    queryset = Vehicle.objects.all()
-    serializer_class = VehicleSerializer
+# class VehicleList(generics.ListCreateAPIView):
+#     queryset = Vehicle.objects.all()
+#     serializer_class = VehicleSerializer
     
-class VehicleDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Vehicle.objects.all()
-    serializer_class = VehicleSerializer
+# class VehicleDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Vehicle.objects.all()
+#     serializer_class = VehicleSerializer
     
-class ServiceList(generics.ListCreateAPIView):
-    queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
+# class ServiceList(generics.ListCreateAPIView):
+#     queryset = Service.objects.all()
+#     serializer_class = ServiceSerializer
 
-class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Service.objects.all()
-    serializer_class = ServiceSerializer
+# class ServiceDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Service.objects.all()
+#     serializer_class = ServiceSerializer
     
-"""class SaleList(generics.ListCreateAPIView):
-    queryset = Sale.objects.all()
-    serializer_class = SaleSerializer
+# # class SaleList(generics.ListCreateAPIView):
+# #     queryset = Sale.objects.all()
+# #     serializer_class = SaleSerializer
 
-class SaleDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Sale.objects.all()
-    serializer_class = SaleSerializer"""
+# # class SaleDetail(generics.RetrieveUpdateDestroyAPIView):
+# #     queryset = Sale.objects.all()
+# #     serializer_class = SaleSerializer"""
 

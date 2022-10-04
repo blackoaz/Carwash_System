@@ -51,8 +51,12 @@ TENANT_APPS = (
     # Third Party Apps
     'phonenumber_field',
     'rest_framework',
+    'rest_framework.authtoken',
     'rest_framework_simplejwt',
-    'widget_tweaks',
+    'widget_tweaks', 
+    'bootstrap_modal_forms',
+    'django_filters',
+    
     
     # your tenant-specific apps
     'carwash',
@@ -105,7 +109,7 @@ WSGI_APPLICATION = 'cwwms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': os.getenv('DB_NAME', 'Carwash_Database'),
+        'NAME': os.getenv('DB_NAME', 'Carwash_database'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 12345),
         'HOST': os.getenv('HOST', 'localhost'),
@@ -156,7 +160,7 @@ AUTH_USER_MODEL = 'users.CustomUser'
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Africa/nairobi'
 
 USE_I18N = True
 
@@ -173,4 +177,11 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'static'),)
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ]
+}
 

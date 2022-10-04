@@ -80,82 +80,69 @@ nav .fa{
     left: 4px;
     cursor: pointer;
 }
-hr{
-    width: 1400px;
-    border: 0.5px solid;
-    align-items: left;
-}
+
 .functions{
-    align-items: center;
-    width: 80%;
-    align-items: center;
-    padding: 2rem 0rem;
-    margin: 2rem 0rem;
+    align-content: center; 
 }
-.functions .row{
-    align-items: center;
+
+
+.functions .updates a{
+    text-decoration: none; 
+}
+
+.functions .updates button{
+    width: 100px;
+    height: 50px;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+}
+
+.functions .updates{
     display: flex;
-    flex-direction: column;
-    margin-left: auto;
-    margin-right: auto;
-}
-.functions .row .updates ul li{
-    display: flex;
-    flex-direction: column;
-    list-style: none;
-    align-content: right;
-    margin-top: 80px;
-    margin-left: 15px; 
-    
-}
-.functions .row  .services{
-    display: grid;
-    grid-template-columns: 0.5fr 0.2fr;
-    grid-template-rows: 0.2fr 1fr;
-    text-align: center;
-    background-color: beige;
-}
-.functions .row  .updates{
-    display: flex;
-    flex-direction: column;
+    flex-direction: row;
     text-align: center;
 
 }
 .btn1, .btn2{
-    margin: 50px;
-    width: 200px;
-    height: 150px;
-    font-size: 24px;
+    margin: 10px;
+    width: 150px;
+    height: 100px;
+    font-size: 20px;
     border-radius: 10px;
     text-decoration: none;
+    color: #000900;
+    border: 2px solid;
 }
 .btn3, .btn4{
-    margin: 50px;
-    width: 200px;
-    height: 150px;
-    font-size: 24px;
+    margin: 10px;
+    width: 150px;
+    height: 100px;
+    font-size: 20px;
     border-radius: 10px;
-    
+    color: #000900;
+    border: 2px solid;
 }
 .btn1{
-    background-color: rgb(228, 228, 240);
+    background-color: transparent;
     
 }
 .btn1 a{
     text-decoration: none;
 }
 .btn2{
-    background-color: rgba(0, 128, 0, 0.925);
+    background-color: transparent;
 }
 .btn3{
-background-color: rgb(46, 241, 88);
+background-color: transparent;
 }
 .btn4{
-    background-color: rgb(131, 247, 222);
+    background-color: transparent;
 }
 .btn1:hover,.btn2:hover,.btn3:hover, .btn4:hover{
     cursor: pointer;
     background-color: transparent;
+    color: rgba(53, 53, 219, 0.729);
     box-shadow: 0,3,15,rgba(0, 0, 0, 0.8);
 }
 h2{
@@ -223,7 +210,7 @@ h2{
         text-align: center;
 
 }
-/*media Query*/
+/* media Query */
 @media(max-width: 700px){
     .header{
         min-height: 200px;
@@ -280,13 +267,6 @@ h2{
     font-size: 5;
     color: #fff;
 
-}
-.verticalLine {
-    height: 450px;
-    border-right: 3px solid #000900;
-    position: absolute;
-    right: 25%;
-    margin-top: 20px;   
 }
     .btn1,.btn2,.btn3,.btn4{
         align-items: left;
@@ -347,7 +327,7 @@ h2{
         .functions .row  .updates a{
             color: rgb(3, 3, 3);
         }
-} 
+}
 
 
 

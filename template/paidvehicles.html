@@ -5,15 +5,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="{% static 'assets/CSS/main.css' %}">
     <link rel="stylesheet" href="{% static 'assets/CSS/carwashsys.css' %}">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Document</title>
 </head>
 <body>
-    <div class="wrapper4">
+    <form action="" method="get" autocomplete="off">
+
+        <center>{{ myFilter.form }}
+        <button type="submit" class="btn btn-primary">Search</button></center>
+  
+    </form>
+    <div class="wrapper4" style="margin-top: 50px;">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -24,11 +31,10 @@
                     <th>Attendant</th>
                     <th>Price</th>
                     <th>Commision</th>
-                    <th>Payment</th>
                 </tr>
             </thead>
             <tbody>
-                {% for sale in sales %}
+                {% for sale in myFilter.qs %}
                     <tr>
                         <td>{{sale.created}}</td>
                         <td>{{sale.service.name}}</td>
@@ -36,51 +42,46 @@
                         <td>{{sale.body_type}}</td>
                         <td>{{sale.staff}}</td>
                         <td>{{sale.service.price}}</td>
-                        <td>{{sale.commision}}</td>
-                        <td>
-                            <span class="action_btn">
-                            <a href="{% url 'Payment' sale.uid %}">PAY</a>
-                            </span>
-                        </td>
-                        
+                        <td>{{sale.commision}}</td> 
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="5"><b>Total of Unpaid Vehicles</b></td>
+                    <td colspan="5"><b>Total</b></td>
                     <td style="font-weight: bold;" id="saletotal"></td>
                     <td style="font-weight: bold;" id="commisiontotal"></td>
                 </tr>
             </tbody>
-
-        </table>
+            
+          </table>
     </div>
+    
 
     <script src="{% static 'assets/javascript/main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-    <script src="{% static './jquery-3.6.1.min.js' %}"></script>
-    <script>
-        //summation of paid rent and Management Earning
-        $(document).ready(function(){
-            var sale;
-            var commission;
-            var totalSale = 0;
-            var totalCommision = 0;
-            $('td:nth-child(6)').each(function(){
-                sale = $(this).html();
-                totalSale+=parseInt(sale);
-                $('#saletotal').text(totalSale)
-    
-            })
-            $('td:nth-child(7)').each(function(){
-                commission = $(this).html();
-                totalCommision+=parseInt(commission);
-                $('#commisiontotal').text(totalCommision)
-    
-            })
-    
-            console.log('Hello world')
+<script src="{% static './jquery-3.6.1.min.js' %}"></script>
+<script>
+    //summation of paid rent and Management Earning
+    $(document).ready(function(){
+        var sale;
+        var commission;
+        var totalSale = 0;
+        var totalCommision = 0;
+        $('td:nth-child(6)').each(function(){
+            sale = $(this).html();
+            totalSale+=parseInt(sale);
+            $('#saletotal').text(totalSale)
+
         })
-    </script>
+        $('td:nth-child(7)').each(function(){
+            commission = $(this).html();
+            totalCommision+=parseInt(commission);
+            $('#commisiontotal').text(totalCommision)
+
+        })
+
+        console.log('Hello world')
+    })
+</script>
 </body>
 </html>
 {% endblock content %}

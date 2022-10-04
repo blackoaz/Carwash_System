@@ -13,8 +13,8 @@ let bodybtns = document.getElementsByClassName('body-btn')
 for(let i = 0; i < bodybtns.length; i++){
     bodybtns[i].addEventListener('click', function() {
         
-        let bodydata = document.getElementById('bodyinput').innerText
-        document.getElementById('bodyType').value += bodydata
+       var bodydata = document.getElementById('bodyinput').innerText
+        document.getElementById('bodyType').value = bodydata
 
         console.log('bodybtns')
         

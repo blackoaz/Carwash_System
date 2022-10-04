@@ -1,3 +1,5 @@
+from distutils.log import info
+from pyexpat.errors import messages
 from unicodedata import category
 import uuid
 
@@ -56,7 +58,7 @@ class Service(models.Model):
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
-    uid = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False, unique=True)
+    uid = models.UUIDField(primary_key=True,default=uuid.uuid4, editable=False)
     
     
     class Meta:
@@ -102,8 +104,8 @@ class CarwashSale(models.Model):
                 message="Vehicle Registration doesn't comply",
             ),
         ])
-    category = models.CharField(max_length=100, unique=True)  
-    service = models.ForeignKey(Service, on_delete=models.PROTECT) 
+    body_type = models.CharField(max_length=100)  
+    service = models.ForeignKey(Service, on_delete=models.CASCADE) 
     staff = models.CharField(max_length=100)
     commision = models.PositiveIntegerField(default = 0)
     created = models.DateTimeField(auto_now_add=True)

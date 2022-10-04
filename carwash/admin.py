@@ -5,7 +5,7 @@ from django.contrib import admin
 from .models import Vehicle,Category,Service,Staff,CarwashSale
 
 class CarwashSaleAdmin(admin.ModelAdmin):
-    list_display = ['vehicle','category','service','staff','commision']
+    list_display = ['vehicle','body_type','service','staff','commision']
 
 
 admin.site.register(Vehicle)

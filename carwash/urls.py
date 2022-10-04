@@ -1,19 +1,25 @@
 from django.urls import path
-from .views import CategoryList, CategoryDetail, VehicleList, VehicleDetail, ServiceList, ServiceDetail #SaleList, SaleDetail
+from .views import *
 from carwash import views
 
 urlpatterns = [
-    #path('categories/', CategoryList.as_view(), name='create-list-category'),
-    #path('categories/<int:pk>', CategoryDetail.as_view(), name='get-update-delete-category'),
-    #path('vehicles/', VehicleList.as_view(), name='create-list-vehicle'),
-    #path('vehicles/<int:pk>', VehicleDetail.as_view(), name='get-update-delete-vehicle'),
-    #path('services/', ServiceList.as_view(), name='create-list-service'),
-    #path('services/<int:pk>', ServiceDetail.as_view(), name='get-update-delete-service'),
-    #path('sales/', SaleList.as_view(), name='create-list-sale'),
-    #path('sales/<int:pk>', SaleDetail.as_view(), name='get-update-delete-sale'),
+#API URLS    
+    # path('categories/', CategoryApiView.as_view(), name='create-list-category'),
+    # path('categories/<int:pk>', CategoryDetail.as_view(), name='get-update-delete-category'),
+    # path('vehicles/', vehicleApiView.as_view(), name='create-list-vehicle'),
+    # path('vehicles/<int:pk>', vehicletDetail.as_view(), name='get-update-delete-vehicle'),
+    # path('services/', ServiceApiView.as_view(), name='create-list-service'),
+    # path('services/<int:pk>', ServiceDetail.as_view(), name='get-update-delete-service'),
+    # path('Carwashsales/', CarwashSaleItemApiView.as_view(), name='create-list-sale'),
+    # path('Carwashsales/<int:pk>', CarwashSaleItemDetail.as_view(), name='get-update-delete-Carwashsale'),
+    # path('staff/', StaffApiView.as_view(), name='create-list-staff'),
+    # path('staff/<int:pk>', StaffDetail.as_view(), name='get-update-delete-staff'),
+#End of API URLS
     path('home/',views.home, name ='home'),
     path('carwash/', views.index, name = 'carwash'),
     path('more_vehicles/', views.recent, name = 'recentWash'),
+    path('paid_vehicles/', views.paid_vehicles, name = 'paidVehicles'),
+    path('payment/<str:pk>', views.payment, name = 'Payment'),
     path('menu/', views.main, name = 'main_menu'),
     path('body/', views.body_type, name = 'body_type'),
     path('register_sale', views.register_sale, name = 'register_sale'),
@@ -46,16 +52,3 @@ urlpatterns = [
     path('logout/', views.logOut, name = 'logout'),
 ]
     
-
-"""
-    #Api urls
-    path('vehicles/', views.vehicleApiView.as_view()),
-    path('vehicle_update/<int:pk>/', views.vehicletDetail.as_view()),
-    path('categories/', views.CategoryApiView.as_view()),
-    path('category_update/<int:pk>/', views.CategoryDetail.as_view()),
-    path('services/', views.ServiceApiView.as_view()),
-    path('service_update/<int:pk>/', views.ServiceDetail.as_view()),
-    path('saleitem/', views.SaleItemApiView.as_view()),
-    path('saleitem_update/<int:pk>/', views.SaleItemDetail.as_view()),
-    path('sale/', views.SaleApiView.as_view()),
-    path('sale_update/<int:pk>/', views.SaleDetail.as_view()),"""

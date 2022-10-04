@@ -64,7 +64,7 @@ h1{
 }
 
 
-   .wrapper1{
+   /* .wrapper1{
     display: grid;
     grid-auto-columns: 17%;
     gap:3;
@@ -73,7 +73,7 @@ h1{
     overscroll-behavior-inline: contain;
     padding-top: 20px;
     padding-bottom: 20px;
-   }
+   } */
    .wrapper1 .body-btn button{
     width: 100px;
     height: 50px;
@@ -98,15 +98,15 @@ h1{
     gap:3;
     overflow-x: auto;
     grid-auto-flow: column;
-    max-height: 120px;
     padding-top: 20px;
     padding-bottom: 20px;
     margin-left: 4px;
     width: 100%;
+    grid-row: wrap;
    }
    .wrapper2 .service-type button{
-    width: 120px;
-    height: 80px;
+    width: 100px;
+    height: 60px;
     text-align: center;
     background-color: #fff;
     margin-right: 4px;
@@ -307,7 +307,7 @@ table th td{
     color: #fff;
 }
 
-@media(max-width: 800px){
+/* @media(max-width: 800px){
     .page-wrapper{
         flex-wrap: wrap;
     }
@@ -317,14 +317,14 @@ table th td{
     }
     .wrapper4{
         /* max-width: 900px; */
-        /* padding: 15px; */
+        /* padding: 15px; 
         overflow: auto;
-        /* margin: auto; */
+        /* margin: auto; 
         border-radius: 10px;
-        /* position: relative; */}
+        /* position: relative; }
 }
 
-@media(min-width:801px),(max-width: 1000px){
+/* @media(min-width:801px),(max-width: 1000px){
     .page-wrapper{
         flex-wrap: wrap;
     } 
@@ -350,7 +350,7 @@ table th td{
         overflow: auto;
         /* margin: auto; */
         border-radius: 10px;
-        /* position: relative; */}
+        /* position: relative; }
 
     .wrapper2{
         width: 50%;
@@ -393,4 +393,4 @@ table th td{
         width: 4.7rem;
        }
 }
- 
+  */ 

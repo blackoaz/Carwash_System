@@ -2,7 +2,7 @@ from dataclasses import field
 from pyexpat import model
 from rest_framework import serializers
 
-from .models import Vehicle, Service, Category
+from .models import Vehicle, Service, Category,Staff,CarwashSale
 
 # ModelSerializer provides an API to create serializers
 # from your models
@@ -25,6 +25,18 @@ class VehicleSerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
+        fields = '__all__'
+        read_only_fields = ('uid', 'created', 'updated')
+
+class StaffSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Staff
+        fields = '__all__'
+        read_only_fields = ('uid', 'created', 'updated')
+
+class CarwashSaleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CarwashSale
         fields = '__all__'
         read_only_fields = ('uid', 'created', 'updated')
         
