@@ -54,8 +54,11 @@
 
         </table>
     </div>
-
-    <script src="{% static 'assets/javascript/main.js' %}"></script>
+    <div class="row">
+        <center>
+            <a href="{% url 'carwash' %}"><button style="margin-top: 5px;padding:4px;border-radius:4px;border:none"><i class="fa fa-chevron-left"></i> Carwash</button></a>
+        </center>    
+    </div>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <script src="{% static './jquery-3.6.1.min.js' %}"></script>
     <script>

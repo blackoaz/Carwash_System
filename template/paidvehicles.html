@@ -14,13 +14,18 @@
     <title>Document</title>
 </head>
 <body>
+    <div class="row">
+        <center>
+            <a href="{% url 'carwash' %}"><button style="margin-top: 5px;padding:4px;border-radius:4px;border:none"><i class="fa fa-chevron-left"></i> Carwash</button></a>
+        </center>    
+    </div>
     <form action="" method="get" autocomplete="off">
 
-        <center>{{ myFilter.form }}
-        <button type="submit" class="btn btn-primary">Search</button></center>
+        {{ myFilter.form }}
+        <button type="submit" class="btn btn-primary">Search</button>
   
     </form>
-    <div class="wrapper4" style="margin-top: 50px;">
+    <div class="wrapper4" style="margin-top: 5px;">
         <table class="table table-bordered">
             <thead>
                 <tr>
@@ -54,11 +59,8 @@
             
           </table>
     </div>
-    
-
-    <script src="{% static 'assets/javascript/main.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
-<script src="{% static './jquery-3.6.1.min.js' %}"></script>
+    <script src="{% static './jquery-3.6.1.min.js' %}"></script>
 <script>
     //summation of paid rent and Management Earning
     $(document).ready(function(){

@@ -4,7 +4,13 @@
 
 {% block content %}
 
-<div class="container-md border" style="margin-top: 90px;">
+<div class="row">
+    <center>
+        <a href="{% url 'main_menu' %}"><button  style="margin-top: 5px;padding:4px;border-radius:4px;border:none"><i class="fa fa-chevron-left"></i> Main Menu</button></a>
+        <a href="{% url 'paidVehicles' %}"><button style="margin-top: 5px;padding:4px;border-radius:4px;border:none">Sales <i class="fa fa-chevron-right"></i></button></a>
+    </center>    
+</div>
+<div class="container-md border" style="margin-top: 5px;">
     <div class="row">
         <div class="col-md-8 border">
             <h3>Register Vehicle Details</h3>
@@ -12,9 +18,7 @@
                 <!-- Vehicle registration section-->
                 <p>{% for message in messages %}</p>
                 <div class="alert alert-success"><h6 font-size="60px" font-weight="bold">{{ message }}</h6></div>
-        
                 {% endfor %}
-                <div><h6 font-size="60px" font-weight="bold">{{form.errors}}</h6></div>
                 <input class="search-enter" type="text" placeholder="Enter Vehicle Number Plate" id="numberPlate">
                 <!-- <input class="search-enter" type="text" placeholder="Enter Body Type" id="body_type" name="category"> -->
                 <input type="submit" value="Enter" class="btn-enter" onclick="PlateOutput()" id="submit-btn"> 
@@ -29,7 +33,7 @@
                 <div class="washer"><button id="operator-btn">{{staff.first_name}} </button></div>
                 {% endfor %}
             </div>
-            <div class="wrapper2">
+            <!-- <div class="wrapper2">
                 {% for service in services %}
                 <div class="service-type">
                     <button id="servce-btn">
@@ -37,7 +41,7 @@
                     </button>
                 </div>
                 {% endfor %}  
-            </div>
+            </div> -->
 <!-- washed vehicles but unpaid, table-->
 
             <div class="wrapper4">
@@ -76,7 +80,7 @@
         
                 </table>
             </div>
-            <div class="wrapper5">
+            <div class="row wrapper5">
                 <div class="N-page"><a href="{% url 'recentWash' %}"><button>more</button></a></div>
             </div>
         </div>

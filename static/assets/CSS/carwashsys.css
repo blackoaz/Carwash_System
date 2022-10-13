@@ -114,6 +114,7 @@ h1{
     cursor: pointer;
     border-radius: 6px;
     border: 2px solid rgb(26, 26, 73);
+    align-content: right;
    }
 
    .wrapper2 .service-type button:hover{

@@ -6,6 +6,7 @@ from .models import Vehicle,Category,Service,Staff,CarwashSale
 
 class CarwashSaleAdmin(admin.ModelAdmin):
     list_display = ['vehicle','body_type','service','staff','commision']
+    list_filter = ['created','staff']
 
 
 admin.site.register(Vehicle)

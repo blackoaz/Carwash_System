@@ -12,7 +12,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
-from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.models import User
 from django.contrib import auth,messages
@@ -203,18 +202,6 @@ def updateVehicle(request, pk=0):
             form.save()
             return redirect('vehicles')
 
-
-
-    # vehicle = Vehicle.objects.get(id=pk)
-    # form = VehicleForm(instance=vehicle)
-    # form = VehicleForm()
-    # if request.method == 'POST':
-    #     #print("printing Post",request.POST)
-    #     form = VehicleForm(request.POST,instance=vehicle)
-    #     if form.is_valid():
-    #         form.save()
-    #         return redirect('vehicles')
-    # context = {'form':form}
     
 
 def deleteVehicle(request, pk):
@@ -225,31 +212,19 @@ def deleteVehicle(request, pk):
     context = {'vehicle':vehicle}
     return render(request, 'deleteVehicle.html',context)
 
-#sale
-# def register_vehicle(request):
-#     form = VehicleForm()
-#     if request.method == 'POST':
-#         form = VehicleForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             messages.info(request,'vehicle created successfully proceed payment')
-#         elif form is not None:
-#             messages.info(request,'vehicle already exist or does not comply with Registration Format')    
-#         return redirect('carwash')
-#     context = {'form':form}               
-#     return render(request,'carwashsys.html',context) 
-
 
 def register_sale(request):
-    form = CarwashSaleForm()        
-    if request.method == 'POST':
-        form = CarwashSaleForm(request.POST.get)
+    if request.method == 'GET':
+        form = CarwashSaleForm() 
+        context = {'form':form}
+        return render(request,'carwashsys.html',context) 
+    else:
+        form = CarwashSaleForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.info(request,'Sale Registered successfully')   
-            return redirect('carwash')          
-    context = {'form':form}               
-    return render(request,'carwashsys.html',context) 
+        messages.info(request,'Sale Registered successfully')
+        return redirect('carwash') 
+      
 
 #user registration and login
 def registerUser(request):
@@ -260,7 +235,7 @@ def registerUser(request):
         if form.is_valid():
             form.save()
             user = form.cleaned_data.get('username')
-            messages.success(request,'Account was created for ' + " " + user)
+            messages.success(request,f'Account was created for ' + " " + user)
             return redirect ('login')
     context = {'form':form}
     return render(request,'registerUser.html',context) 
@@ -278,7 +253,7 @@ def loginPage(request):
             login(request,user)
             return redirect('main_menu')
         else:
-            messages.info(request,'Username or Password is incorrect')    
+            messages.info(request,f'Username or Password is incorrect')    
         
     context = {}
     return render(request,'login.html',context)

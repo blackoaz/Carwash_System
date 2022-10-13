@@ -98,7 +98,7 @@ class CarwashSale(models.Model):
     ('Paid', 'Paid'), 
     ('Unpaid', 'Unpaid'),
     )
-    vehicle = models.CharField(max_length=10, unique=True, validators=[
+    vehicle = models.CharField(max_length=10, validators=[
             RegexValidator(
                 regex='^[A-Z]{2,4}[0-9]{3,4}[A-Z]{1}$',
                 message="Vehicle Registration doesn't comply",
