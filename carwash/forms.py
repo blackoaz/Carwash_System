@@ -12,28 +12,28 @@ class CategoryForm(ModelForm):
 class CustomUserForm(ModelForm):
     class Meta:
         model = CustomUser
-        fields = ['username','first_name','last_name','email','phone_number','national_id_number','user_type']
+        fields = ['username','first_name','last_name','email','phone_number','user_type']
 
 class VehicleForm(ModelForm):
     class Meta:
-        model = Vehicle  
-        fields = ['registration','category'] 
+        model = Vehicle
+        fields = ['registration','category']
 
         widgets = {
              'registration' : forms.TextInput(attrs={'class':'input','placeholder':'Enter Number Plate'})
-        } 
+        }
 
 
 class ServiceForm(ModelForm):
     class Meta:
-        model = Service  
-        fields = "__all__" 
+        model = Service
+        fields = "__all__"
 
 class CarwashSaleForm(ModelForm):
     class Meta:
-        model = CarwashSale  
+        model = CarwashSale
         fields = ['vehicle','body_type','staff','service']
 
         # widgets = {
         #     'vehicle' : forms.TextInput(attrs={'class':'input'})
-        # }            
+        # }

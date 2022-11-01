@@ -36,7 +36,14 @@ ALLOWED_HOSTS = []
 
 SHARED_APPS = (
     'django_tenants',  # mandatory
-    'main', # you must list the app where your tenant model resides in 
+    'main', # you must list the app where your tenant model resides in
+    # 'django.contrib.contenttypes',
+    # 'django.contrib.admin',
+    # 'django.contrib.auth',
+    # 'django.contrib.sessions',
+    # 'django.contrib.messages',
+    # 'django.contrib.staticfiles',
+
 )
 
 TENANT_APPS = (
@@ -47,17 +54,18 @@ TENANT_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
     # Third Party Apps
     'phonenumber_field',
     'rest_framework',
     'rest_framework.authtoken',
-    'rest_framework_simplejwt',
-    'widget_tweaks', 
+    #'rest_framework_simplejwt',
+    'widget_tweaks',
     'bootstrap_modal_forms',
     'django_filters',
-    
-    
+    "corsheaders",
+
+
     # your tenant-specific apps
     'carwash',
     'toilet',
@@ -75,6 +83,7 @@ MIDDLEWARE = [
     'django_tenants.middleware.main.TenantMainMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -109,7 +118,7 @@ WSGI_APPLICATION = 'cwwms.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django_tenants.postgresql_backend',
-        'NAME': os.getenv('DB_NAME', 'Carwash_database'),
+        'NAME': os.getenv('DB_NAME', 'Carwash_System'),
         'USER': os.getenv('DB_USER', 'postgres'),
         'PASSWORD': os.getenv('DB_PASSWORD', 12345),
         'HOST': os.getenv('HOST', 'localhost'),
@@ -121,18 +130,12 @@ DATABASE_ROUTERS = (
     'django_tenants.routers.TenantSyncRouter',
 )
 
-REST_FRAMEWORK = {
-    
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    )
-}
 
-SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
-    'AUTH_HEADER_TYPES': ('Bearer',),
-}
+# SIMPLE_JWT = {
+#     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5),
+#     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+#     'AUTH_HEADER_TYPES': ('Bearer',),
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -185,3 +188,7 @@ REST_FRAMEWORK = {
     ]
 }
 
+CORS_ALLOWED_ORIGINS = [
+
+    "http://localhost:3000"
+]
