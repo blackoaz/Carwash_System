@@ -13,7 +13,7 @@
 <body class="container">
     <section class="header">
         <nav>
-            <a href="#"Class="logo"><b>LOGO</b></a>       
+            <a href="#"Class="logo"><b>LOGO</b></a>
         </nav>
     </section>
     <section class="form">
@@ -23,12 +23,12 @@
                     <h1>LOGIN</h1><br>
                     {% csrf_token %}
                     <div class="user">
-                        <label for="Username">USERNAME:</label>
-                        <input type="text">
+                        <label for="username">USERNAME:</label>
+                        {{form.username}}
                     </div>
                     <div class="password">
                         <label for="password">PASSWORD:</label>
-                        <input type="password">
+                        {{form.password}}
                     </div>
                     <div class="btn-text-center">
                         <input type="submit" type="button" class="btn btn-primary" value="Sign in">
@@ -44,11 +44,11 @@
                     {% endfor %}
                 </div>
                   <p>if you dont have an account <a href="{% url 'registerUser' %}">Register here</a></p>
-                 
+
                 </form>
-            </div> 
+            </div>
         </div>
-    </section> 
+    </section>
     <script>
         var navLinks =document.getElementById("navLinks");
         function showMenu(){
@@ -56,7 +56,7 @@
         }
         function hideMenu(){
             navLinks.style.right = "-200px"
-        } 
+        }
       </script>
 </body>
 </html>

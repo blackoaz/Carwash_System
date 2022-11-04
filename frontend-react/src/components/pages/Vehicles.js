@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar  from './Navbar';
 
 function Vehicles() {
   return (
     <div>
         <Navbar />
-        <section class="container Body-table">
+        <section className="container Body-table">
         <table>
             <thead>
                 <tr>
@@ -23,9 +24,9 @@ function Vehicles() {
                     <td>created</td>
                     <td>updated</td>
                     <td>
-                        <span class="action_btn" id="update-btn">
-                            <a href="/updateVehicle/:vehicle.id" class="modal-btn">Update</a>
-                            <a href="/deleteVehicle/:vehicle.id" class="modal-btn">Delete</a>
+                        <span className="action_btn" id="update-btn">
+                            <Link to="/updateVehicle/:vehicle.id" className="modal-btn">Update</Link>
+                            <Link to="/deleteVehicle/:vehicle.id" className="modal-btn">Delete</Link>
                         </span>
                     </td>
 

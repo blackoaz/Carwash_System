@@ -8,18 +8,15 @@ document.getElementById('submit-btn').addEventListener('click', () =>{
 });
 
 //Adding Body type to sale form *body-btn
-let bodybtns = document.getElementsByClassName('body-btn')
+let bodybtns = document.getElementsByClassName('body-btn1')
 
-for(let i = 0; i < bodybtns.length; i++){
+for(i = 0; i < bodybtns.length; i++){
     bodybtns[i].addEventListener('click', function() {
-        
-       var bodydata = document.getElementById('bodyinput').innerText
-        document.getElementById('bodyType').value = bodydata
 
-        console.log('bodybtns')
-        
-
-        
+       var categoryId= this.dataset.category
+       var action = this.dataset.action
+       console.log('categoryId:',categoryId, 'Action:',action)
+        //document.getElementById('bodyType').value = bodydata
     })
 }
 //Adding Service type to sale form
@@ -27,14 +24,14 @@ var servicebtns = document.getElementsByClassName('service-type')
 
 for(var i = 0; i < servicebtns.length; i++){
     servicebtns[i].addEventListener('click', function() {
-        
+
         var servicebtns = document.getElementById('servce-btn').innerText
         document.getElementById('serviceType').value = servicebtns
         //servicebtns.style.backgroundColor = "Green"  service-type
 
         console.log(servicebtns)
 
-        
+
     })
 }
 //Adding staff  to sale form 'operator-btn' 'washer'

@@ -6,7 +6,7 @@ function Users() {
   return (
     <div>
         <Navbar/>
-        <section class="container Body-table">
+        <section className="container Body-table">
         <table>
             <thead>
                 <tr>
@@ -24,7 +24,7 @@ function Users() {
                     <td>user_type</td>
                     <td>phone_number</td>
                     <td>
-                        <span class="action_btn" id="update-btn">
+                        <span className="action_btn" id="update-btn">
                             <Link to="/updateUser/: user.id" class="modal-btn">Update</Link>
                             <Link to="/deleteUser/: user.id" class="modal-btn">Delete</Link>
                         </span>
@@ -33,7 +33,7 @@ function Users() {
                 </tr>
             </tbody>
         </table>
-        <Link to="createUser"><button class="btn-create" id="create-btn">Create</button> </Link>
+        <Link to="createUser"><button className="btn-create" id="create-btn">Create</button> </Link>
     </section>
 
     </div>

@@ -3,6 +3,7 @@ from multiprocessing import context
 from unicodedata import category
 from urllib import request
 import uuid
+from django.http import HttpResponse
 from django.http import Http404
 from django.shortcuts import redirect, render
 from rest_framework import generics, serializers, status
@@ -23,243 +24,249 @@ from . filters import *
 
 
 
-# def home(request):
-#         return render(request,'home.html')
+def home(request):
+        return render(request,'home.html')
 
-# def main(request):
-#     return render(request,'index.html')
+def main(request):
+    return render(request,'index.html')
 
-# def index(request):
-#     categories = Category.objects.all()
-#     vehicle = Vehicle.objects.all()
-#     services = Service.objects.all()
-#     sales = CarwashSale.objects.filter(Payment_status='Unpaid')[0:2]
-#     staffs = Staff.objects.all()
-#     form = VehicleForm()
-#     form = CarwashSaleForm()
+def index(request):
+    categories = Category.objects.all()
+    vehicle = Vehicle.objects.all()
+    services = Service.objects.all()
+    sales = CarwashSale.objects.filter(Payment_status='Unpaid')[0:2]
+    staffs = Staff.objects.all()
+    form = VehicleForm()
+    form = CarwashSaleForm()
 
-#     context = {'categories':categories,'services':services,'sales':sales,'staffs':staffs,'vehicles':vehicle,'form':form,'form':form}
-#     return render(request,'carwashsys.html',context)
+    context = {'categories':categories,'services':services,'sales':sales,'staffs':staffs,'vehicles':vehicle,'form':form,'form':form}
+    return render(request,'carwashsys.html',context)
 
-# def recent(request):
-#     sales = CarwashSale.objects.filter(Payment_status='Unpaid')
-#     context = {'sales':sales}
-#     return render(request,'recent.html',context)
+def recent(request):
+    sales = CarwashSale.objects.filter(Payment_status='Unpaid')
+    context = {'sales':sales}
+    return render(request,'recent.html',context)
 
-# def payment(request,pk):
-#     CarwashSale.objects.filter(uid=pk).update(Payment_status='Paid')
-#     return redirect('paidVehicles')
-
-
-# def paid_vehicles(request):
-#     sales = CarwashSale.objects.filter(Payment_status='Paid')
-#     myFilter = CarwashSaleFilter(request.GET,queryset=sales)
-#     paginate_by = 10
-#     context = {'sales':sales,'paginate_by':paginate_by,'myFilter':myFilter}
-#     return render(request,'paidvehicles.html',context)
-
-# def body_type(request):
-#     categories = Category.objects.all()
-#     context = {'categories':categories,}
-#     return render(request,'body_type.html',context)
-
-# def services(request):
-#     services = Service.objects.all()
-#     context = {'services':services,}
-#     return render(request,'services.html',context)
-
-# def vehicles(request):
-#     vehicle = Vehicle.objects.all()
-#     context = {'vehicles':vehicle}
-#     return render(request,'vehicles.html',context)
-
-# def users(request):
-#     users = CustomUser.objects.all()
-#     context = {'users':users,}
-#     return render(request,'users.html',context)
-
-# #CRUD OPERATIONS FOR VEHICLE BODY
-# def create_body(request):
-#     form = CategoryForm()
-#     if request.method == 'POST':
-#         #print("printing Post",request.POST)
-#         form = CategoryForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('body_type')
-
-#     context = {'form':form}
-#     return render(request,'createbody.html',context)
-
-# def update_body(request, pk):
-
-#     category = Category.objects.get(id=pk)
-#     form = CategoryForm(instance=category)
-#     form = CategoryForm()
-#     if request.method == 'POST':
-#         #print("printing Post",request.POST)
-#         form = CategoryForm(request.POST,instance=category)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('body_type')
-#     context = {'form':form}
-#     return render (request,'createbody.html',context)
-
-# def delete_body(request, pk):
-#     category = Category.objects.get(id=pk)
-#     if request.method == 'POST':
-#         category.delete()
-#         return redirect('body_type')
-#     context = {'category':category}
-#     return render(request, 'deletebody.html',context)
-
-# #CRUD operations for Users
-# def createUser(request):
-#     form = CustomUserForm()
-#     if request.method == 'POST':
-#         #print("printing Post",request.POST)
-#         form = CustomUserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('users')
-
-#     context = {'form':form}
-#     return render(request,'createUser.html',context)
-
-# def updateUser(request, pk=0):
-
-#     form = CustomUserForm()
-#     user = CustomUser.objects.get(id=pk)
-#     form = CustomUserForm(instance=user)
-
-#     if request.method == 'POST':
-#         #print("printing Post",request.POST)
-#         form = CustomUserForm(request.POST,instance=user)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('users')
-#     context = {'form':form}
-#     return render (request,'updateUser.html',context)
-
-# def deleteUser(request, pk):
-#     user = CustomUser.objects.get(id=pk)
-#     if request.method == 'POST':
-#         user.delete()
-#         return redirect('users')
-#     context = {'user':user}
-#     return render(request, 'deleteUser.html',context)
-
-# #CRUD operations for Service
-# def createService(request):
-#     form = ServiceForm()
-#     if request.method == 'POST':
-#         #print("printing Post",request.POST)
-#         form = ServiceForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('services')
-#     context = {'form':form}
-#     return render(request,'createService.html',context)
-
-# def updateService(request, pk):
-#     form = ServiceForm()
-#     service = Service.objects.get(uid=pk)
-#     form = ServiceForm(instance=service)
-#     if request.method == 'POST':
-#         #print("printing Post",request.POST)
-#         form = ServiceForm(request.POST,instance=service)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('services')
-#     context = {'form':form}
-#     return render (request,'updateService.html',context)
+def payment(request,pk):
+    CarwashSale.objects.filter(uid=pk).update(Payment_status='Paid')
+    return redirect('paidVehicles')
 
 
-# def deleteService(request, pk):
-#     service = Service.objects.get(uid=pk)
-#     if request.method == 'POST':
-#         Service.delete()
-#         return redirect('services')
-#     context = {'service':service}
-#     return render(request, 'deleteService.html',context)
+def paid_vehicles(request):
+    sales = CarwashSale.objects.filter(Payment_status='Paid')
+    myFilter = CarwashSaleFilter(request.GET,queryset=sales)
+    paginate_by = 10
+    context = {'sales':sales,'paginate_by':paginate_by,'myFilter':myFilter}
+    return render(request,'paidvehicles.html',context)
+
+def body_type(request):
+    categories = Category.objects.all()
+    context = {'categories':categories,}
+    return render(request,'body_type.html',context)
+
+def services(request):
+    services = Service.objects.all()
+    context = {'services':services,}
+    return render(request,'services.html',context)
+
+def vehicles(request):
+    vehicle = Vehicle.objects.all()
+    context = {'vehicles':vehicle}
+    return render(request,'vehicles.html',context)
+
+def users(request):
+    users = CustomUser.objects.all()
+    context = {'users':users,}
+    return render(request,'users.html',context)
+
+#CRUD OPERATIONS FOR VEHICLE BODY
+def create_body(request):
+    form = CategoryForm()
+    if request.method == 'POST':
+        #print("printing Post",request.POST)
+        form = CategoryForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('body_type')
+
+    context = {'form':form}
+    return render(request,'createbody.html',context)
+
+def update_body(request, pk):
+
+    category = Category.objects.get(id=pk)
+    form = CategoryForm(instance=category)
+    form = CategoryForm()
+    if request.method == 'POST':
+        #print("printing Post",request.POST)
+        form = CategoryForm(request.POST,instance=category)
+        if form.is_valid():
+            form.save()
+            return redirect('body_type')
+    context = {'form':form}
+    return render (request,'createbody.html',context)
+
+def delete_body(request, pk):
+    category = Category.objects.get(id=pk)
+    if request.method == 'POST':
+        category.delete()
+        return redirect('body_type')
+    context = {'category':category}
+    return render(request, 'deletebody.html',context)
+
+#CRUD operations for Users
+def createUser(request):
+    form = UserRegistrationForm()
+    if request.method == 'POST':
+        #print("printing Post",request.POST)
+        form = UserRegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+
+    context = {'form':form}
+    return render(request,'createUser.html',context)
+
+def updateUser(request, pk=0):
+
+    form = UserRegistrationForm()
+    user = CustomUser.objects.get(id=pk)
+    form = UserRegistrationForm(instance=user)
+
+    if request.method == 'POST':
+        #print("printing Post",request.POST)
+        form = UserRegistrationForm(request.POST,instance=user)
+        if form.is_valid():
+            form.save()
+            return redirect('users')
+    context = {'form':form}
+    return render (request,'updateUser.html',context)
+
+def deleteUser(request, pk):
+    user = CustomUser.objects.get(id=pk)
+    if request.method == 'POST':
+        user.delete()
+        return redirect('users')
+    context = {'user':user}
+    return render(request, 'deleteUser.html',context)
+
+#CRUD operations for Service
+def createService(request):
+    form = ServiceForm()
+    if request.method == 'POST':
+        #print("printing Post",request.POST)
+        form = ServiceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('services')
+    context = {'form':form}
+    return render(request,'createService.html',context)
+
+def updateService(request, pk):
+    form = ServiceForm()
+    service = Service.objects.get(uid=pk)
+    form = ServiceForm(instance=service)
+    if request.method == 'POST':
+        #print("printing Post",request.POST)
+        form = ServiceForm(request.POST,instance=service)
+        if form.is_valid():
+            form.save()
+            return redirect('services')
+    context = {'form':form}
+    return render (request,'updateService.html',context)
 
 
-# #CRUD Operations for Vehicles registered
-# def updateVehicle(request, pk=0):
-#     if request.method == 'GET':
-#         if id == 0:
-#             form = VehicleForm()
-#         else:
-#             vehicle = Vehicle.objects.get(id=pk)
-#             form = VehicleForm(instance=vehicle)
-#         return render (request,'updateVehicle.html',{'form':form})
-#     else:
-#         form = VehicleForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('vehicles')
+def deleteService(request, pk):
+    service = Service.objects.get(uid=pk)
+    if request.method == 'POST':
+        Service.delete()
+        return redirect('services')
+    context = {'service':service}
+    return render(request, 'deleteService.html',context)
+
+
+#CRUD Operations for Vehicles registered
+def updateVehicle(request, pk=0):
+    if request.method == 'GET':
+        if id == 0:
+            form = VehicleForm()
+        else:
+            vehicle = Vehicle.objects.get(id=pk)
+            form = VehicleForm(instance=vehicle)
+        return render (request,'updateVehicle.html',{'form':form})
+    else:
+        form = VehicleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('vehicles')
 
 
 
-# def deleteVehicle(request, pk):
-#     vehicle = Vehicle.objects.get(id=pk)
-#     if request.method == 'POST':
-#         vehicle.delete()
-#         return redirect('vehicles')
-#     context = {'vehicle':vehicle}
-#     return render(request, 'deleteVehicle.html',context)
+def deleteVehicle(request, pk):
+    vehicle = Vehicle.objects.get(id=pk)
+    if request.method == 'POST':
+        vehicle.delete()
+        return redirect('vehicles')
+    context = {'vehicle':vehicle}
+    return render(request, 'deleteVehicle.html',context)
 
 
-# def register_sale(request):
-#     if request.method == 'GET':
-#         form = CarwashSaleForm()
-#         context = {'form':form}
-#         return render(request,'carwashsys.html',context)
-#     else:
-#         form = CarwashSaleForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             # messages.info(request,'Sale Registered successfully')
-#         return redirect('carwash')
+def register_sale(request):
+    if request.method == 'GET':
+        form = CarwashSaleForm()
+        context = {'form':form}
+        return render(request,'carwashsys.html',context)
+    else:
+        form = CarwashSaleForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # messages.info(request,'Sale Registered successfully')
+        return redirect('carwash')
 
 
-# #user registration and login
-# def registerUser(request):
-#     form = CustomUserForm()
+#user registration and login
+def registerUser(request):
+    if request.user.is_authenticated:
+        return redirect('home')
+    else:
+        form = UserRegistrationForm()
 
-#     if request.method == 'POST':
-#         form = CustomUserForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             user = form.cleaned_data.get('username')
-#             messages.success(request,f'Account was created for ' + " " + user)
-#             return redirect ('login')
-#     context = {'form':form}
-#     return render(request,'registerUser.html',context)
-
-
-# def loginPage(request):
-
-#     if request.method == 'POST':
-#         username = request.POST.get('Username')
-#         password = request.POST.get('password')
-#         user = authenticate(request,username=username,password=password)
+        if request.method == 'POST':
+            form = UserRegistrationForm(request.POST)
+            if form.is_valid():
+                form.save()
+                user = form.cleaned_data.get('username')
+                #messages.success(request,'Account was created for ' + " " + user)
+                return redirect ('loginPage')
+        context = {'form':form}
+    return render(request,'registerUser.html',context)
 
 
-#         if user is not None:
-#             login(request,user)
-#             return redirect('main_menu')
-#         else:
-#             messages.info(request,f'Username or Password is incorrect')
+def loginPage(request):
+        if request.POST:
+            form = UserLoginForm(request.POST)
+            if form.is_valid:
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+                user = authenticate(request,username=username,password=password)
 
-#     context = {}
-#     return render(request,'login.html',context)
+                if user is not None:
+                    login(request,user)
+                    return redirect('home')
+                # else:
+                #     messages.info(request,'Username or Password is incorrect')
 
-# def logOut(request):
-#     logout(request)
-#     return redirect('loginPage')
+        else:
+            form = UserLoginForm()
 
-#CreateView, UpdateView, DeleteView, ListView, DetailView
+        context = {'form':form}
+        return render(request,'loginpage.html',context)
+
+def logOut(request):
+    logout(request)
+    return redirect('loginPage')
+
+# API CreateView, UpdateView, DeleteView, ListView, DetailView
 
 class CategoryList(generics.ListCreateAPIView):
     queryset = Category.objects.all()

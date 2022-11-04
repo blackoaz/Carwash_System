@@ -9,14 +9,27 @@ function Carwash() {
   const [sales, setSales] = useState([]);
   //const [registrations, setRegistration] = useState('')
   const [plate, setPlate] = useState("");
+  const [vehicle, setVehicle] = useState("");
+  const [body, setBody] = useState("");
+  const [staff, setStaff] = useState("");
+  const [service, setService] = useState("");
 
   const plateSubmit = (event) => {
     event.preventDefault();
-    console.log(`The Entered plate is ${plate}`);
-    // document.getElementById('submit-btn').addEventListener('click', () =>{
-    // let Nump = document.getElementsByClassName('numberPlate').value = " "
+    let Nump = document.getElementById('numberPlate').value
+    document.getElementById('numbplate').value = Nump;
   };
+  let bodybtns = document.getElementsByClassName('body-btn1')
 
+for(var i = 0; i < bodybtns.length; i++){
+    bodybtns[i].addEventListener('click', function() {
+
+       var categoryId= this.dataset.category
+       var action = this.dataset.action
+       console.log('categoryId:',categoryId, 'Action:',action)
+       document.getElementById('bodyType').value = categoryId
+    })
+  }
   useEffect(() => {
     fetch("http://demo.localhost:8000/carwash/staffs/", {
       method: "GET",
@@ -110,7 +123,7 @@ function Carwash() {
               {categories.map((category, index) => {
                 return (
                   <div className="col-md-3 body-btn" key={index}>
-                    <button id="bodyinput">{category.name}</button>
+                    <button className="body-btn1" data-category={ category.name } data-action="add" id="bodyinput">{category.name}</button>
                   </div>
                 );
               })}
@@ -176,23 +189,38 @@ function Carwash() {
               <form action="{% url 'register_sale' %}" method="POST">
                 <div className="vhcl">
                   <label>Vehicle: </label>
-                  <input type="text" />
+                  <input type="text"
+                  id="numbplate"
+                  value={vehicle}
+                  onChange={(e) => setVehicle(e.target.value)}
+                  />
                 </div>
                 <br />
                 <div className="vhcl">
-                  <label name="Category">Body Type: </label>
-                  <input type="text" />
+                  <label htmlFor="Category">Body Type: </label>
+                  <input type="text"
+                  id="bodyType"
+                  value={body}
+                  onChange={(e) => setBody(e.target.value)}
+                  />
                 </div>
                 <br />
                 <div className="srvc">
-                  <label name="Staff">Staff: </label>
-                  <input type="text" />
+                  <label htmlFor="Staff">Staff: </label>
+                  <input type="text"
+                  id="staff-washing"
+                  value={staff}
+                  onChange={(e) => setStaff(e.target.value)}
+                  />
                 </div>
                 <br />
 
                 <div className="srvc">
-                  <label name="Service">Service: </label>
-                  <input type="text" />
+                  <label htmlFor="Service">Service: </label>
+                  <input type="text"
+                  value={service}
+                  onChange={(e) => setService(e.target.value)}
+                  />
                 </div>
                 <br />
                 {/* <!-- <div class="vhcl">

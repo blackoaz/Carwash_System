@@ -1,11 +1,12 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar  from './Navbar';
 
 function Services() {
   return (
     <div>
         <Navbar />
-        <div class="container Body-table">
+        <div className="container Body-table">
         <table>
             <thead>
                 <tr>
@@ -25,16 +26,16 @@ function Services() {
                     <td>price</td>
                     <td>available</td>
                     <td>
-                        <span class="action_btn" id="update-btn">
-                            <a href="{% url 'updateService' service.uid %}" class="modal-btn">Update</a>
-                            <a href="{% url 'deleteService' service.uid %}" class="modal-btn">Delete</a>
+                        <span className="action_btn" id="update-btn">
+                            <Link to="{% url 'updateService' service.uid %}" className="modal-btn">Update</Link>
+                            <Link to="{% url 'deleteService' service.uid %}" className="modal-btn">Delete</Link>
                         </span>
                     </td>
                 </tr>
             </tbody>
 
         </table>
-        <a href="{% url 'createService'%}"><button class="btn-create" id="create-btn">Create</button></a>
+        <Link to="{% url 'createService'%}"><button className="btn-create" id="create-btn">Create</button></Link>
     </div>
     </div>
   )

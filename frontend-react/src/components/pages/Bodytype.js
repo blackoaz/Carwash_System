@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navbar  from './Navbar';
 
 function Bodytype() {
@@ -22,9 +23,9 @@ function Bodytype() {
                         <td>created</td>
                         <td>updated</td>
                         <td>
-                            <span class="action_btn" id="update-btn">
-                                <a href="{% url 'update_body' category.id %}" class="modal-btn">Update</a>
-                                <a href="{% url 'delete_body' category.id %}" class="modal-btn">Delete</a>
+                            <span className="action_btn" id="update-btn">
+                                <Link to="{% url 'update_body' category.id %}" className="modal-btn">Update</Link>
+                                <Link to="{% url 'delete_body' category.id %}" className="modal-btn">Delete</Link>
                             </span>
                         </td>
 
@@ -32,7 +33,7 @@ function Bodytype() {
                 </tbody>
 
             </table>
-            <a href="{% url 'create_body' %}"><button class="btn-create" id="create-btn">Create</button> </a>
+            <Link to="{% url 'create_body' %}"><button className="btn-create" id="create-btn">Create</button> </Link>
         </div>
 
 

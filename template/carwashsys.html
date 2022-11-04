@@ -30,12 +30,12 @@
             </div>
             <div class="row wrapper1">
                 {% for category in categories %}
-                <div class="col-md-3 body-btn"><button id="bodyinput">{{ category.name }}</button></div>
+                <div class="col-md-3 body-btn"><button data-category= {{category.name}} data-action="add" class="body-btn1" id="bodyinput">{{ category.name }}</button></div>
                 {% endfor %}
             </div>
             <div class="wrapper3">
                 {% for staff in staffs %}
-                <div class="washer"><button id="operator-btn">{{staff.first_name}} </button></div>
+                <div class="washer"><button data-staff= {{staff.first_name}} data-action="add" class="staff-btns">{{staff.first_name}} </button></div>
                 {% endfor %}
             </div>
             <!-- <div class="wrapper2">
@@ -146,38 +146,33 @@
 
         //bodyinput id  //body-btn class
         //function for outputting body type to carwashsale form
-        var bodybtns = $('.body-btn')
-        for (var i = 0; i < bodybtns.length; i++) {
+        var bodybtns = $('.body-btn1')
+        for (i = 0; i < bodybtns.length; i++) {
             bodybtns.eq(i).on('click', function () {
-                const bodydata = $('#bodyinput').text()
-                $('#bodyType').val(bodydata)
-                console.log('bodydata:', bodydata)
+                var categoryId= this.dataset.category
+                var action = this.dataset.action
+                document.getElementById('bodyType').value = categoryId
+                console.log('categoryId:',categoryId, 'Action:',action)
             });
         }
     });
 
-    //function for outputting service type to carwashsale form
-    var servicebtns = $('.service-type')
-    for (var i = 0; i < servicebtns.length; i++) {
-        servicebtns.eq(i).on('click', function () {
-            var servicebtns = $('#servce-btn').text()
-            $('#serviceType').val(servicebtns)
-        });
-    }
 
     //function for outputting carwash attendant to carwashsale form
-    var staffbtns = $('.washer')
+    var staffbtns = $('.staff-btns')
     for (var i = 0; i < staffbtns.length; i++) {
         staffbtns.eq(i).on('click', function () {
-            var staffbtns = $('#operator-btn').text()
-            $('#staff-washing').val(staffbtns)
+            var staffname= this.dataset.staff
+            var action = this.dataset.action
+            document.getElementById('staff-washing').value = staffname
+            console.log('staffname:',staffname, 'Action:',action)
         });
     }
 
     //changing button background color
-    $('button').click(function () {
-        $(this).css('background', 'green').css('color', 'white')
-    })
+    //$('button').click(function () {
+        //$(this).css('background', 'green').css('color', 'white')
+    //})
 
 
     //function for plate output into the carwashsale form

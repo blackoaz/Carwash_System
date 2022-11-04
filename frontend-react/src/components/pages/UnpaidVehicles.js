@@ -22,8 +22,8 @@ function UnpaidVehicles() {
     <div>
         <Navbar/>
         <div>
-        <div class="wrapper">
-        <table class="table table-bordered">
+        <div className="wrapper">
+        <table className="table table-bordered">
             <thead>
                 <tr>
                     <th>Date</th>
@@ -49,7 +49,7 @@ function UnpaidVehicles() {
                         <td>{sale.commision}</td>
                         <td>
                           <span className="action_btn">
-                            <a href="{% url 'Payment' sale.uid %}">PAY</a>
+                            <Link to="{% url 'Payment' sale.uid %}">PAY</Link>
                           </span>
                         </td>
                       </tr>
@@ -63,9 +63,9 @@ function UnpaidVehicles() {
 
         </table>
     </div>
-    <div class="row">
+    <div className="row">
         <center>
-            <Link to="/carwash"><button ><i class="fa fa-chevron-left"></i> Carwash</button></Link>
+            <Link to="/carwash"><button ><i className="fa fa-chevron-left"></i> Carwash</button></Link>
         </center>
     </div>
 
