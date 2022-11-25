@@ -37,7 +37,7 @@ h1{
    .search-enter{
     background-color:rgb(250, 252, 253);
     display: inline-block;
-    width: 200px;
+    width: 400px;
     border-radius: 10px;
     font-weight: bold;
     font-size: auto;
@@ -106,7 +106,7 @@ h1{
    }
    .wrapper2 .service-type button{
     width: 100px;
-    height: 60px;
+    height: 80px;
     text-align: center;
     background-color: #fff;
     margin-right: 4px;
@@ -175,7 +175,7 @@ table thead th{
 }
 table th td{
     border: 1px solid #000000;
-    
+
 }
 
 .action_btn{
@@ -192,7 +192,7 @@ table th td{
     font-weight: bold;
     border-radius: 3px;
     border-radius: 10px;
-    
+
 }
 .action_btn:hover>a:hover{
     background-color: #064115;
@@ -318,9 +318,9 @@ table th td{
     }
     .wrapper4{
         /* max-width: 900px; */
-        /* padding: 15px; 
+        /* padding: 15px;
         overflow: auto;
-        /* margin: auto; 
+        /* margin: auto;
         border-radius: 10px;
         /* position: relative; }
 }
@@ -328,11 +328,11 @@ table th td{
 /* @media(min-width:801px),(max-width: 1000px){
     .page-wrapper{
         flex-wrap: wrap;
-    } 
+    }
     .payment-sec{
         margin-left: 6px;
     }
-  
+
     .carwash-sec{
         max-width: 600px;
        }
@@ -366,8 +366,8 @@ table th td{
        }
        .wrapper2 .service-type button{
         width: 5rem;
-       } 
-       
+       }
+
        .wrapper3{
         width: 50%;
         display: grid;
@@ -394,4 +394,4 @@ table th td{
         width: 4.7rem;
        }
 }
-  */ 
+  */

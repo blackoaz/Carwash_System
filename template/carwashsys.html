@@ -19,118 +19,129 @@
             <h3>Register Vehicle Details</h3>
             <div class="">
                 <!-- Vehicle registration section-->
+
                 <p>{% for message in messages %}</p>
+                {% if message.success %}
                 <div class="alert alert-success">
                     <h6 font-size="60px" font-weight="bold">{{ message }}</h6>
                 </div>
-                {% endfor %}
-                <input class="search-enter" type="text" placeholder="Enter Vehicle Number Plate" id="numberPlate">
-                <!-- <input class="search-enter" type="text" placeholder="Enter Body Type" id="body_type" name="category"> -->
-                <input type="submit" value="Enter" class="btn-enter" onclick="PlateOutput()" id="submit-btn">
+                {% else %}
+                <div class="alert alert-success"></div>
+                <h6 font-size="60px" font-weight="bold">{{ message.error }}</h6>
             </div>
-            <div class="row wrapper1">
-                {% for category in categories %}
-                <div class="col-md-3 body-btn"><button data-category= {{category.name}} data-action="add" class="body-btn1" id="bodyinput">{{ category.name }}</button></div>
-                {% endfor %}
-            </div>
-            <div class="wrapper3">
-                {% for staff in staffs %}
-                <div class="washer"><button data-staff= {{staff.first_name}} data-action="add" class="staff-btns">{{staff.first_name}} </button></div>
-                {% endfor %}
-            </div>
-            <!-- <div class="wrapper2">
-                {% for service in services %}
-                <div class="service-type">
-                    <button id="servce-btn">
+            {% endif %}
+            {% endfor %}
+            <input class="search-enter" type="text" placeholder="Enter Vehicle Number Plate e.g. KMNF127Y"
+                id="numberPlate">
+            <!-- <input class="search-enter" type="text" placeholder="Enter Body Type" id="body_type" name="category"> -->
+            <input type="submit" value="Enter" class="btn-enter" onclick="PlateOutput()" id="submit-btn">
+        </div>
+        <!-- <div class="row wrapper1">
+            {% for category in categories %}
+            <div class="col-md-3 body-btn"><button data-category={{category.name}} class="body-btn1"
+                    id="bodyinput">{{ category.name }}</button></div>
+            {% endfor %}
+        </div> -->
+        <div class="wrapper2">
+            {% for service in services %}
+            <div class="service-type">
+                <button data-service={{service.name}} data-price={{service.price}} data-body={{service.body_type}} id="servce-btn" class="service-type1">
                     {{service.name}}
-                    </button>
-                </div>
-                {% endfor %}
-            </div> -->
-            <!-- washed vehicles but unpaid, table-->
-
-            <div class="wrapper4">
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Date</th>
-                            <th>Service</th>
-                            <th>Registration</th>
-                            <th>Body Type</th>
-                            <th>Price</th>
-                            <th>Attendant</th>
-                            <th>Commision</th>
-                            <th>Payment</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {% for sale in sales %}
-                        <tr>
-                            <td>{{sale.created}}</td>
-                            <td>{{sale.service.name}}</td>
-                            <td>{{sale.vehicle}}</td>
-                            <td>{{sale.body_type}}</td>
-                            <td>{{sale.service.price}}</td>
-                            <td>{{sale.staff}}</td>
-                            <td>{{sale.commision}}</td>
-                            <td>
-                                <span class="action_btn">
-                                    <a href="{% url 'Payment' sale.uid %}">PAY</a>
-                                </span>
-                            </td>
-
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-
-                </table>
+                </button>
             </div>
-            <div class="row wrapper5">
-                <div class="N-page"><a href="{% url 'recentWash' %}"><button>more</button></a></div>
-            </div>
-        </div>
-        <div class="col-md-4 border">
-            <div class="wrapper6">
-                <h3>Customer Details</h3>
-                <!--                Carwash sale form section                                               -->
-                <form action="{% url 'register_sale' %}" method="POST">
-                    {% csrf_token %}
-                    <div class="vhcl">
-                        <label for="vehicle">Vehicle: </label>
-                        {% render_field form.vehicle id="numbplate" %}
-                    </div><br>
-                    <div class="vhcl">
-                        <label for="Category">Body Type: </label>
-                        {% render_field form.body_type id="bodyType" %}
-                    </div><br>
-                    <div class="srvc">
-                        <label for="Staff">Staff: </label>
-                        {% render_field form.staff id="staff-washing" %}
-                    </div><br>
-
-                    <div class="srvc">
-                        <label for="Service">Service: </label>
-                        {% render_field form.service id="serviceType" %}
-                    </div><br>
-                    <!-- <div class="vhcl">
-                    <label for="Payment_status">Payment Status: </label>
-                    {% render_field form.Payment_status id="staff-washing" %}
-                </div><br> -->
-
-                    <div class="wrapper7">
-                        <div class="pay-sec"><a href="#"><button>Cash</button></a></div>
-                        <div class="pay-sec"><button>Mpesa</button></div>
-                        <div class="pay-sec"><button>Card</button></div>
-                    </div><br>
-                    <div class="wrapper8">
-                        <div class="p-btn"><input type="submit" value="Add Sale"></div>
-                        <div class="c-btn"><input type="reset" value="clear"></div>
-                    </div>
-                </form>
-            </div>
+            {% endfor %}
         </div>
 
+
+        <div class="wrapper3">
+            {% for staff in staffs %}
+            <div class="washer"><button data-staff={{staff.first_name}} class="staff-btns">{{staff.first_name}}
+                </button></div>
+            {% endfor %}
+        </div>
+        <!-- washed vehicles but unpaid, table-->
+
+        <div class="wrapper4">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Service</th>
+                        <th>Registration</th>
+                        <!-- <th>Body Type</th> -->
+                        <th>Price</th>
+                        <th>Attendant</th>
+                        <th>Commision</th>
+                        <th>Payment</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for sale in sales %}
+                    <tr>
+                        <td>{{sale.created}}</td>
+                        <td>{{sale.service}}</td>
+                        <td>{{sale.vehicle}}</td>
+                        <!-- <td>{{sale.body_type}}</td> -->
+                        <td>{{sale.service_price}}</td>
+                        <td>{{sale.staff}}</td>
+                        <td>{{sale.commision}}</td>
+                        <td>
+                            <span class="action_btn">
+                                <a href="{% url 'Payment' sale.uid %}">PAY</a>
+                            </span>
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </tbody>
+
+            </table>
+        </div>
+        <div class="row wrapper5">
+            <div class="N-page"><a href="{% url 'recentWash' %}"><button>more</button></a></div>
+        </div>
     </div>
+    <div class="col-md-4 border">
+        <div class="wrapper6">
+            <h3>Customer Details</h3>
+            <!--                Carwash sale form section                                               -->
+            <form action="{% url 'register_sale' %}" method="POST">
+                {% csrf_token %}
+                <div class="vhcl">
+                    <label for="vehicle">Number Plate: </label>
+                    {% render_field form.vehicle id="numbplate" %}
+                </div><br>
+                <!-- <div class="vhcl">
+                    <label for="Category">Body Type: </label>
+                    {% render_field form.body_type id="bodyType" %}
+                </div><br> -->
+                <div class="srvc">
+                    <label for="Service">Service: </label>
+                    {% render_field form.service id="serviceType" %}
+                </div><br>
+                <div class="srvc">
+                    <label for="Service_price">Price: </label>
+                    {% render_field form.service_price id="servicePrice" %}
+                </div><br>
+                <div class="srvc">
+                    <label for="Staff">Staff: </label>
+                    {% render_field form.staff id="staff-washing" %}
+                </div><br>
+
+                <!-- <div class="wrapper7">
+                    <div class="pay-sec"><a href="#"><button>Cash</button></a></div>
+                    <div class="pay-sec"><button>Mpesa</button></div>
+                    <div class="pay-sec"><button>Card</button></div>
+                </div><br> -->
+                <div class="wrapper8">
+                    <div class="p-btn"><input type="submit" value="Add Sale"></div>
+                    <div class="c-btn"><input type="reset" value="clear"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
 
 </div>
 <script src="{% static 'assets/javascript/jquery-3.6.1.min.js' %}"></script>
@@ -149,12 +160,40 @@
         var bodybtns = $('.body-btn1')
         for (i = 0; i < bodybtns.length; i++) {
             bodybtns.eq(i).on('click', function () {
-                var categoryId= this.dataset.category
-                var action = this.dataset.action
+                var categoryId = this.dataset.category
                 document.getElementById('bodyType').value = categoryId
-                console.log('categoryId:',categoryId, 'Action:',action)
+                console.log('categoryId:', categoryId)
             });
         }
+
+//function for outputting service to carwashsale form
+        var servicebtns = $('.service-type1')
+        for (i = 0; i < servicebtns.length; i++) {
+            servicebtns.eq(i).on('click', function () {
+                var vehicleService = this.dataset.service
+                document.getElementById('serviceType').value = vehicleService
+                console.log('vehicleService:', vehicleService)
+            });
+        }
+
+        //function for outputting service price to carwashsale form
+        var servicebtns = $('.service-type1')
+        for (i = 0; i < servicebtns.length; i++) {
+            servicebtns.eq(i).on('click', function () {
+                var vehicleService = this.dataset.price
+                document.getElementById('servicePrice').value = vehicleService
+                console.log('vehicleService:', vehicleService)
+            });
+        }
+
+         //function for outputting service body type to carwashsale form
+         var servicebtns = $('.service-type1')
+         for (i = 0; i < servicebtns.length; i++) {
+             servicebtns.eq(i).on('click', function () {
+                 var vehicleService = this.dataset.body
+                 document.getElementById('bodyType').value = vehicleService
+             });
+         }
     });
 
 
@@ -162,16 +201,15 @@
     var staffbtns = $('.staff-btns')
     for (var i = 0; i < staffbtns.length; i++) {
         staffbtns.eq(i).on('click', function () {
-            var staffname= this.dataset.staff
-            var action = this.dataset.action
+            var staffname = this.dataset.staff
             document.getElementById('staff-washing').value = staffname
-            console.log('staffname:',staffname, 'Action:',action)
+            console.log('staffname:', staffname)
         });
     }
 
     //changing button background color
     //$('button').click(function () {
-        //$(this).css('background', 'green').css('color', 'white')
+    //$(this).css('background', 'green').css('color', 'white')
     //})
 
 

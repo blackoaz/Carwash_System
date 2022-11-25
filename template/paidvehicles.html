@@ -17,13 +17,19 @@
     <div class="row">
         <center>
             <a href="{% url 'carwash' %}"><button style="margin-top: 5px;padding:4px;border-radius:4px;border:none"><i class="fa fa-chevron-left"></i> Carwash</button></a>
-        </center>    
+        </center>
+        <hr>
+        <center><h4>Paid Vehicles</h4></center>
+        <hr>
     </div>
     <form action="" method="get" autocomplete="off">
 
-        {{ myFilter.form }}
+       Date From:{{ myFilter.form.start_date }}
+        Date To:{{ myFilter.form.end_date }}
+        Service:{{ myFilter.form.service }}
+        Staff:{{ myFilter.form.staff }}
         <button type="submit" class="btn btn-primary">Search</button>
-  
+
     </form>
     <div class="wrapper4" style="margin-top: 5px;">
         <table class="table table-bordered">
@@ -32,7 +38,7 @@
                     <th>Date</th>
                     <th>Service</th>
                     <th>Registration</th>
-                    <th>Body Type</th>
+                    <!-- <th>Body Type</th> -->
                     <th>Attendant</th>
                     <th>Price</th>
                     <th>Commision</th>
@@ -42,21 +48,21 @@
                 {% for sale in myFilter.qs %}
                     <tr>
                         <td>{{sale.created}}</td>
-                        <td>{{sale.service.name}}</td>
+                        <td>{{sale.service}}</td>
                         <td>{{sale.vehicle}}</td>
-                        <td>{{sale.body_type}}</td>
+                        <!-- <td>{{sale.body_type}}</td> -->
                         <td>{{sale.staff}}</td>
-                        <td>{{sale.service.price}}</td>
-                        <td>{{sale.commision}}</td> 
+                        <td>{{sale.service_price}}</td>
+                        <td>{{sale.commision}}</td>
                     </tr>
                 {% endfor %}
                 <tr>
-                    <td colspan="5"><b>Total</b></td>
+                    <td colspan="4"><b>Total</b></td>
                     <td style="font-weight: bold;" id="saletotal"></td>
                     <td style="font-weight: bold;" id="commisiontotal"></td>
                 </tr>
             </tbody>
-            
+
           </table>
     </div>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
@@ -68,13 +74,13 @@
         var commission;
         var totalSale = 0;
         var totalCommision = 0;
-        $('td:nth-child(6)').each(function(){
+        $('td:nth-child(5)').each(function(){
             sale = $(this).html();
             totalSale+=parseInt(sale);
             $('#saletotal').text(totalSale)
 
         })
-        $('td:nth-child(7)').each(function(){
+        $('td:nth-child(6)').each(function(){
             commission = $(this).html();
             totalCommision+=parseInt(commission);
             $('#commisiontotal').text(totalCommision)

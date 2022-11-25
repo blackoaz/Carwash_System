@@ -9,5 +9,5 @@ class CarwashSaleFilter(django_filters.FilterSet):
     end_date =  DateFilter(field_name='created',lookup_expr='lte')
     class Meta:
         model = CarwashSale
-        fields = ['service','staff']
+        fields = ['service','staff','start_date','end_date']
         exclude = ['created']

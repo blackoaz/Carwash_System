@@ -5,19 +5,19 @@ from rest_framework.authtoken.views import obtain_auth_token
 
 urlpatterns = [
 #API URLS
-path('categories/', CategoryList.as_view(), name='create-list-category'),
-path('categories/<str:pk>', CategoryDetail.as_view(), name='get-update-delete-category'),
-path('vehicles/', VehicleList.as_view(), name='create-list-vehicle'),
-path('vehicles/<str:pk>', VehicleDetail.as_view(), name='get-update-delete-vehicle'),
-path('services/', ServiceList.as_view(), name='create-list-service'),
-path('services/<str:pk>', ServiceDetail.as_view(), name='get-update-delete-service'),
-path('sales/', SaleList.as_view(), name='create-list-sale'),
-path('sales/<str:pk>', SaleDetail.as_view(), name='get-update-delete-sale'),
-path('users/', UserList.as_view(), name='create-list-sale'),
-path('users/<str:pk>', UserDetail.as_view(), name='get-update-delete-sale'),
-path('staffs/', StaffList.as_view(), name='create-list-sale'),
-path('staffs/<str:pk>', StaffDetail.as_view(), name='get-update-delete-sale'),
-path('auth/', obtain_auth_token),
+# path('categories/', CategoryList.as_view(), name='create-list-category'),
+# path('categories/<str:pk>', CategoryDetail.as_view(), name='get-update-delete-category'),
+# path('vehicles/', VehicleList.as_view(), name='create-list-vehicle'),
+# path('vehicles/<str:pk>', VehicleDetail.as_view(), name='get-update-delete-vehicle'),
+# path('services/', ServiceList.as_view(), name='create-list-service'),
+# path('services/<str:pk>', ServiceDetail.as_view(), name='get-update-delete-service'),
+# path('sales/', SaleList.as_view(), name='create-list-sale'),
+# path('sales/<str:pk>', SaleDetail.as_view(), name='get-update-delete-sale'),
+# path('users/', UserList.as_view(), name='create-list-sale'),
+# path('users/<str:pk>', UserDetail.as_view(), name='get-update-delete-sale'),
+# path('staffs/', StaffList.as_view(), name='create-list-sale'),
+# path('staffs/<str:pk>', StaffDetail.as_view(), name='get-update-delete-sale'),
+# path('auth/', obtain_auth_token),
 
 #End of API URLS
     path('home/',views.home, name ='home'),

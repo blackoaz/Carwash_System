@@ -220,7 +220,7 @@ def register_sale(request):
         form = CarwashSaleForm(request.POST)
         if form.is_valid():
             form.save()
-            # messages.info(request,'Sale Registered successfully')
+            #messages.info(request,'Sale Registered successfully')
         return redirect('carwash')
 
 
@@ -236,7 +236,7 @@ def registerUser(request):
             if form.is_valid():
                 form.save()
                 user = form.cleaned_data.get('username')
-                #messages.success(request,'Account was created for ' + " " + user)
+                #messages.success[request,'Account was created for ' + " " + user]
                 return redirect ('loginPage')
         context = {'form':form}
     return render(request,'registerUser.html',context)
@@ -252,9 +252,9 @@ def loginPage(request):
 
                 if user is not None:
                     login(request,user)
-                    return redirect('home')
-                # else:
-                #     messages.info(request,'Username or Password is incorrect')
+                    return redirect('carwash')
+                #else:
+                    #messages.error(request,f'Username or Password is incorrect')
 
         else:
             form = UserLoginForm()

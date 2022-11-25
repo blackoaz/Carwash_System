@@ -49,7 +49,7 @@ class ServiceForm(ModelForm):
 class CarwashSaleForm(ModelForm):
     class Meta:
         model = CarwashSale
-        fields = ['vehicle','body_type','staff','service']
+        fields = ['vehicle','staff','service','service_price']
 
         # widgets = {
         #     'vehicle' : forms.TextInput(attrs={'class':'input'})

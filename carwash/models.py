@@ -21,7 +21,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 from main.models import Common
 
-# Create your models here.
+#Create your models here.
 
 class Category(models.Model):
     name = models.CharField(max_length=100, unique=True)
@@ -54,8 +54,8 @@ class Vehicle(models.Model):
 
 class Service(models.Model):
     name = models.CharField(max_length=100)
+    body_type = models.CharField(max_length=100)
     description = models.TextField()
-    category = models.ForeignKey(Category, related_name='services', on_delete=models.PROTECT)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     available = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
@@ -67,7 +67,7 @@ class Service(models.Model):
         ordering = ('-name',)
 
     def __str__(self) -> str:
-        return f'{self.name} for {self.category.name}'
+        return f'{self.name}'
 
 class Staff(models.Model):
     first_name = models.CharField(max_length=100)
@@ -92,10 +92,13 @@ class CarwashSale(models.Model):
             ),
         ])
     body_type = models.CharField(max_length=100)
-    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    #service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    service = models.CharField(max_length=100)
+    service_price = models.PositiveIntegerField(default = 0.0)
     staff = models.CharField(max_length=100)
     commision = models.PositiveIntegerField(default = 0)
     created = models.DateField(auto_now_add=True)
+    time_created = models.TimeField(auto_now_add=True)
     #time = models.TimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
     Payment_status = models.CharField(max_length=30, choices=PAYMENT_STATUS, default='Unpaid')
@@ -105,12 +108,13 @@ class CarwashSale(models.Model):
         ordering = ('-created',)
 
     def save(self,*args, **kwargs):
-       if self.service.price <= 99:
-        self.commision = (self.service.price * 40)/100
-       elif self.service.price <= 300:
-        self.commision = (self.service.price * 35)/100
+
+       if self.service_price <= 99:
+        self.commision = (self.service_price * 40)/100
+       elif self.service_price <= 300:
+        self.commision = (self.service_price * 35)/100
        else:
-        self.commision = (self.service.price * 30)/100
+        self.commision = (self.service_price * 30)/100
 
        return super().save(*args,**kwargs)
 
