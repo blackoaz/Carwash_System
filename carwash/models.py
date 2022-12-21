@@ -49,6 +49,11 @@ class Vehicle(models.Model):
     class Meta:
         ordering = ('-registration',)
 
+    def clean(self):
+        if self.registration:
+            self.registration = self.registration.strip()
+
+
     def __str__(self):
         return self.registration
 

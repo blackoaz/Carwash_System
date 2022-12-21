@@ -13,16 +13,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-    
+
     <section class="container Body-table">
         <table>
             <thead>
                 <tr>
                     <th>Service Type</th>
                     <th>Description</th>
-                    <th>Body type</th>
+                   <!--th>Body type</-th-->
                     <th>Price</th>
-                    <th>Status</th>
+                    <!--th>Status</th-->
                     <th>Action</th>
                 </tr>
             </thead>
@@ -31,9 +31,9 @@
                 <tr>
                     <td>{{service.name}}</td>
                     <td>{{service.description}}</td>
-                    <td>{{service.category}}</td>
+                    <!--td>{{service.category}}</td-->
                     <td>{{service.price}}</td>
-                    <td>{{service.available}}</td>
+                    <!--td>{{service.available}}</td-->
                     <td>
                         <span class="action_btn" id="update-btn">
                             <a href="{% url 'updateService' service.uid %}" class="modal-btn">Update</a>
@@ -44,12 +44,12 @@
             {% endfor %}
 
         </table>
-        <a href="{% url 'createService'%}"><button class="btn-create" id="create-btn">Create</button></a>  
+        <a href="{% url 'createService'%}"><button class="btn-create" id="create-btn">Create</button></a>
     </section>
-        
+
         <!--div id="overlay"></div-->
-    <script src="{% static 'assets/javascript/main.js' %}"></script>  
-    
+    <script src="{% static 'assets/javascript/main.js' %}"></script>
+
 </body>
 </html>
 {% endblock content %}

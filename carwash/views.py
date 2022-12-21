@@ -39,6 +39,13 @@ def index(request):
     form = VehicleForm()
     form = CarwashSaleForm()
 
+    # if 'q' in request.GET:
+    #     q = request.GET['q']
+    #     sales = CarwashSale.objects.filter(id__icontains=q)
+    # else:
+    #    sales = ' '
+
+
     context = {'categories':categories,'services':services,'sales':sales,'staffs':staffs,'vehicles':vehicle,'form':form,'form':form}
     return render(request,'carwashsys.html',context)
 
